@@ -15,10 +15,9 @@ class TeamGame extends Model<TeamGameAttributes> implements TeamGameAttributes {
 const initTeamGameModel = (sequelize: Sequelize) => {
   TeamGame.init(
     {
-      PlayerID: {
+      TeamID: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
       },
       GameID: {
         type: DataTypes.INTEGER,
