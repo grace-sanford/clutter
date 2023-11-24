@@ -16,8 +16,8 @@ const TeamGame = initTeamGameModel(db);
 NewImportedPlayer.belongsTo(NewImportedTeam)
 NewImportedTeam.hasMany(NewImportedPlayer);
 
-NewImportedTeam.belongsToMany(NewImportedGame, { through: NewImportedTeamGame });
-NewImportedGame.belongsToMany(NewImportedTeam, { through: NewImportedTeamGame });
+NewImportedTeam.belongsToMany(NewImportedGame, { through: NewImportedTeamGame, as: 'relationship', onUpdate: 'CASCADE'  });
+NewImportedGame.belongsToMany(NewImportedTeam, { through: NewImportedTeamGame, as: 'relationship', onUpdate: 'CASCADE' });
 
 
 export { 

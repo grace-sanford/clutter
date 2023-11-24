@@ -26,13 +26,9 @@ const players = [
 const games = [
   {
     ID: 1,
-    Name: "Game 1",
-    Description: "Description for Game 1",
   },
   {
     ID: 2,
-    Name: "Game 2",
-    Description: "Description for Game 2",
   },
 ];
 
@@ -90,7 +86,7 @@ async function runSeed() {
   try {
     await seed();
     const successMessage = "Seeding success!";
-    figlet(successMessage, function (err, data) {
+    figlet(successMessage, function (err: any, data: any) {
       if (err) {
         console.error(err);
         return;

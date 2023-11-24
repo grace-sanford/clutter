@@ -2,10 +2,9 @@ import express from 'express';
 const router = express.Router();
 
 // Import and use the individual route handlers
-import todosRouter from './todos'; // Import the router
+import gamesRouter from './game'; // Import the router
 
-router.use('/todos', todosRouter); // Use the router
-
+router.use('/games', gamesRouter); // Use the router
 
 // If someone makes a request that starts with `/api`,
 // but we DON'T have a corresponding router, this piece of

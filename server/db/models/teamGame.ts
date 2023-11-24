@@ -30,8 +30,8 @@ const initTeamGameModel = (sequelize: Sequelize) => {
     },
     {
       sequelize,
-      modelName: 'PlayerGame',
-      tableName: 'PlayerGames',
+      modelName: 'TeamGame',
+      tableName: 'TeamGames',
     }
   );
 };

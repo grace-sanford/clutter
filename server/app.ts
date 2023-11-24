@@ -9,18 +9,18 @@ const app: Application = express();
 app.use(express.static(__dirname + '/../public'));
 
 // Body parsing middleware
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 
 // Use the API router for paths starting with "/api"
 app.use('/api', apiRouter);
 
-app.use(cors());
-app.use(morgan('dev'));
+// app.use(cors());
+// app.use(morgan('dev'));
 
 // For all other routes, serve the index.html
-app.use('*', (req, res) => {
-  res.sendFile(__dirname + '/../public/index.html');
-});
+// app.use('*', (req, res) => {
+//   res.sendFile(__dirname + '/../public/index.html');
+// });
 
 export default app;
