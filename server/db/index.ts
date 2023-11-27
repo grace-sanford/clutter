@@ -13,8 +13,8 @@ const Game = initGameModel(db);
 const TeamGame = initTeamGameModel(db);
 
 // Define associations
-NewImportedPlayer.belongsTo(NewImportedTeam)
-NewImportedTeam.hasMany(NewImportedPlayer);
+NewImportedPlayer.belongsTo(NewImportedTeam, { foreignKey: 'teamId' });
+NewImportedTeam.hasMany(NewImportedPlayer, { foreignKey: 'teamId' });
 
 NewImportedTeam.belongsToMany(NewImportedGame, { through: NewImportedTeamGame, as: 'relationship', onUpdate: 'CASCADE'  });
 NewImportedGame.belongsToMany(NewImportedTeam, { through: NewImportedTeamGame, as: 'relationship', onUpdate: 'CASCADE' });

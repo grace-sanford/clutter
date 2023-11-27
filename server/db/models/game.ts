@@ -1,17 +1,17 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
 interface GameAttributes {
-  ID: number;
+  id: number;
 }
 
 class Game extends Model<GameAttributes> implements GameAttributes {
-  public ID!: number;
+  public id!: number;
 }
 
 const initGameModel = (sequelize: Sequelize) => {
   Game.init(
     {
-      ID: {
+      id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true

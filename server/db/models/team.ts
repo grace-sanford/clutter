@@ -1,24 +1,24 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
 interface TeamAttributes {
-  ID: number;
-  Name: string;
+  id: number;
+  name: string;
 }
 
 class Team extends Model<TeamAttributes> implements TeamAttributes {
-  public ID!: number;
-  public Name!: string;
+  public id!: number;
+  public name!: string;
 }
 
 const initTeamModel = (sequelize: Sequelize) => {
   Team.init(
     {
-      ID: {
+      id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      Name: {
+      name: {
         type: DataTypes.STRING(50),
       },
     },

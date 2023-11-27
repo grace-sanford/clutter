@@ -7,38 +7,34 @@ const figlet = require('figlet');
 // Sample players
 const players = [
   {
-    ID: 1,
-    Username: "PeppaPig",
-    Email: "pig@mickeymouseclubhouse.com",
-    PasswordHash: "hashed_password_for_Peppa",
-    TeamID: 1,
+    id: 1,
+    username: "PeppaPig",
+    teamId: 1,
   },
   {
-    ID: 2,
-    Username: "SuzySheep",
-    Email: "sheep@mickeymouseclubhouse.com",
-    PasswordHash: "hashed_password_for_Suzy",
-    TeamID: 2,
+    id: 2,
+    username: "SuzySheep",
+    teamId: 2,
   },
 ];
 
 // Sample games
 const games = [
   {
-    ID: 1,
+    id: 1,
   },
   {
-    ID: 2,
+    id: 2,
   },
 ];
 
 const teams = [
   {
-    ID: 1,
+    id: 1,
     Name: "Team 1"
   },
   {
-    ID: 2,
+    id: 2,
     Name: "Team 2"
   }
 ]
@@ -46,19 +42,19 @@ const teams = [
 // Sample player games
 const teamGames = [
   {
-    TeamID: 1,
-    GameID: 1,
-    Score: 100,
+    teamId: 1,
+    gameId: 1,
+    score: 100,
   },
   {
-    TeamID: 1,
-    GameID: 2,
-    Score: 75,
+    teamId: 1,
+    gameId: 2,
+    score: 75,
   },
   {
-    TeamID: 2,
-    GameID: 2,
-    Score: 100
+    teamId: 2,
+    gameId: 2,
+    score: 100
   }
 ];
 

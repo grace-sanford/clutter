@@ -14,7 +14,7 @@ const CreateGame = () => {
     setLoading(true);
 
     try {
-      const data = await createGame(gameName);
+      const data = await createGame();
       setGameId(data.gameId);
     } catch (err) {
       setError(err as Error);

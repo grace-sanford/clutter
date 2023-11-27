@@ -6,6 +6,9 @@ const router = express.Router();
 
 router.get('/', async (req: Request, res: Response) => {
 try {
+    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    // res.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+    // res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     const response = await Game.findAll({attributes: ['ID', 'createdAt']});
     res.send(response);
   } catch (error) {
@@ -15,7 +18,7 @@ try {
   
 });
 
-router.post('/', async (req: Request, res: Response) => {
+router.post('/create-game', async (req: Request, res: Response) => {
   try {
     res.status(201).send(await Game.create(req.body));
   } catch {

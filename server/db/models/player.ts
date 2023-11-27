@@ -1,35 +1,30 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
 interface PlayerAttributes {
-  ID: number;
-  Username: string;
-  Email: string;
-  PasswordHash: string;
+  id: number;
+  username: string;
+  teamId: number;
 }
 
 class PlayerModel extends Model<PlayerAttributes> implements PlayerAttributes {
-  public ID!: number;
-  public Username!: string;
-  public Email!: string;
-  public PasswordHash!: string;
+  public id!: number;
+  public username!: string;
+  public teamId!: number;
 }
 
 const initPlayerModel1 = (sequelize: Sequelize) => {
   PlayerModel.init(
     {
-      ID: {
+      id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      Username: {
+      username: {
         type: DataTypes.STRING(50),
       },
-      Email: {
-        type: DataTypes.STRING(50),
-      },
-      PasswordHash: {
-        type: DataTypes.STRING(256),
+      teamId: {
+        type: DataTypes.INTEGER,
       },
     },
     {

@@ -3,8 +3,10 @@ const router = express.Router();
 
 // Import and use the individual route handlers
 import gamesRouter from './game'; // Import the router
+import playerTeam from './playerTeam'
 
 router.use('/games', gamesRouter); // Use the router
+router.use('/create-players-teams', playerTeam);
 
 // If someone makes a request that starts with `/api`,
 // but we DON'T have a corresponding router, this piece of

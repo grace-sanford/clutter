@@ -1,29 +1,30 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
 interface TeamGameAttributes {
-  PlayerID: number;
-  GameID: number;
-  Score: number;
+  playerId: number;
+  gameId: number;
+  score: number;
 }
 
 class TeamGame extends Model<TeamGameAttributes> implements TeamGameAttributes {
-  public PlayerID!: number;
-  public GameID!: number;
-  public Score!: number;
+  public playerId!: number;
+  public gameId!: number;
+  public score!: number;
 }
 
 const initTeamGameModel = (sequelize: Sequelize) => {
   TeamGame.init(
     {
-      TeamID: {
+      playerId: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      gameId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
       },
-      GameID: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-      },
-      Score: {
+      score: {
         type: DataTypes.INTEGER,
       },
     },
