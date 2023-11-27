@@ -42,6 +42,7 @@ router.post('/', async (req: Request, res: Response) => {
       const teamIndex = i % numberOfTeams; // Distribute players evenly among teams
       const team = teams[teamIndex];
       const teamId = team.get('id')
+      console.log(teams, "teams")
 
       const player = await Player.create({ username: playerName, teamId: teamId });
       players.push(player);
