@@ -47,17 +47,19 @@ const CreatePlayersTeamsForm = ({showCreatePlayersTeamsForm, setShowCreatePlayer
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div className='flex flex-col items-center'>
       <form onSubmit={handleFormSubmit}>
       {playerFields.map((field) => (
-        <div key={field.id}>
+        <div key={field.id} className="flex items-center">
           <input
             type="text"
             placeholder={`Player ${field.id}`}
             value={field.value}
             onChange={(e) => handlePlayerChange(field.id, e.target.value)}
+            className="bg-gray-200 rounded p-2"
           />
-          <button className="mb-1" type="button" onClick={() => handleRemovePlayerField(field.id)}>
+          {" "}
+          <button className="flex mb-1" type="button" onClick={() => handleRemovePlayerField(field.id)}>
             X
           </button>
         </div>
@@ -72,12 +74,13 @@ const CreatePlayersTeamsForm = ({showCreatePlayersTeamsForm, setShowCreatePlayer
             type="number"
             value={numberOfTeams}
             onChange={(e) => setNumberOfTeams(e.target.value)}
+            className="bg-gray-200 rounded p-2"
             required
           />
         </label>
         <br />
-        <div className="text-center mt-1">
-        <button className="text-red-500 font-bold" type="submit">Make Teams</button>
+        <div className="text-center mt-4">
+        <button className="text-red-500 font-bold" type="submit">Create Teams</button>
         </div>
       </form>
     </div>
