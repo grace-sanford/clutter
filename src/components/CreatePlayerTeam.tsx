@@ -5,7 +5,12 @@ import { createPlayersAndTeams } from '../modules/hooks/useApi';
 
 const CreatePlayersTeamsForm = ({showCreatePlayersTeamsForm, setShowCreatePlayersTeamsForm}: 
   {showCreatePlayersTeamsForm: boolean, setShowCreatePlayersTeamsForm: React.Dispatch<React.SetStateAction<boolean>>}) => {
-  const [playerFields, setPlayerFields] = useState([{ id: 1, value: '' }]);
+
+    const initialPlayerFields = Array.from({ length: 4 }, (_, index) => ({
+    id: index + 1,
+    value: '',
+  }));
+  const [playerFields, setPlayerFields] = useState(initialPlayerFields);
   const [numberOfTeams, setNumberOfTeams] = useState('');
   const [result, setResult] = useState(null);
 
@@ -15,12 +20,6 @@ const CreatePlayersTeamsForm = ({showCreatePlayersTeamsForm, setShowCreatePlayer
       ...prevFields,
       { id: prevFields.length + 1, value: '' },
     ]);
-  };
-
-  const handleRemovePlayerField = (id) => {
-    setPlayerFields((prevFields) =>
-      prevFields.filter((field) => field.id !== id)
-    );
   };
 
   const handlePlayerChange = (id, value) => {
@@ -58,10 +57,6 @@ const CreatePlayersTeamsForm = ({showCreatePlayersTeamsForm, setShowCreatePlayer
             onChange={(e) => handlePlayerChange(field.id, e.target.value)}
             className="bg-gray-200 rounded p-2"
           />
-          {" "}
-          <button className="flex mb-1" type="button" onClick={() => handleRemovePlayerField(field.id)}>
-            X
-          </button>
         </div>
       ))}
       <button type="button" className="mb-1" onClick={handleAddPlayerField}>
