@@ -6,7 +6,7 @@ import { createPlayersAndTeams } from '../modules/hooks/useApi';
 const CreatePlayersTeamsForm = ({showCreatePlayersTeamsForm, setShowCreatePlayersTeamsForm}: 
   {showCreatePlayersTeamsForm: boolean, setShowCreatePlayersTeamsForm: React.Dispatch<React.SetStateAction<boolean>>}) => {
 
-    const initialPlayerFields = Array.from({ length: 4 }, (_, index) => ({
+  const initialPlayerFields = Array.from({ length: 4 }, (_, index) => ({
     id: index + 1,
     value: '',
   }));
@@ -46,7 +46,7 @@ const CreatePlayersTeamsForm = ({showCreatePlayersTeamsForm, setShowCreatePlayer
   };
 
   return (
-    <div className='flex flex-col items-center'>
+    <div className='flex flex-col items-center mb-4'>
       <form onSubmit={handleFormSubmit}>
       {playerFields.map((field) => (
         <div key={field.id} className="flex items-center">
@@ -55,27 +55,32 @@ const CreatePlayersTeamsForm = ({showCreatePlayersTeamsForm, setShowCreatePlayer
             placeholder={`Player ${field.id}`}
             value={field.value}
             onChange={(e) => handlePlayerChange(field.id, e.target.value)}
-            className="bg-gray-200 rounded p-2"
+            className="bg-white rounded p-2"
           />
         </div>
       ))}
-      <button type="button" className="mb-1" onClick={handleAddPlayerField}>
-        Add Player
+      <button type="button" className="mb-1 text-gray-500" onClick={handleAddPlayerField}>
+        Add a Player
       </button>
         <br />
-        <label className="mb-1">
-          Number of Teams:
-          <input
-            type="number"
+        <label className="mb-1 text-gray-500">
+          Number of Teams{' '}
+          <select
             value={numberOfTeams}
             onChange={(e) => setNumberOfTeams(e.target.value)}
-            className="bg-gray-200 rounded p-2"
+            className="bg-white rounded p-2" // Adjusted styling
             required
-          />
+          >
+            {["-", 1, 2, 3, 4, 5, 6].map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
         </label>
         <br />
         <div className="text-center mt-4">
-        <button className="text-red-500 font-bold" type="submit">Create Teams</button>
+        <button className="font-bold" type="submit">Create Teams</button>
         </div>
       </form>
     </div>
