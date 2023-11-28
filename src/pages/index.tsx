@@ -50,7 +50,7 @@ export default function Home() {
       <div className="flex justify-center gap-1 p-8 lg:p-0 text-sm mb-2 mt-2">
           <span className="lg:whitespace-nowrap">code by</span>
           <code className="font-mono font-bold whitespace-nowrap lg:ml-2"><a href="https://github.com/grace-sanford" target="_blank">@gracesanford</a></code> | 
-          <Link className="font-face" href="/about">about this project</Link>
+          <Link className='underline' href="/about">about this project</Link>
       </div>
     </div>
     </Layout>

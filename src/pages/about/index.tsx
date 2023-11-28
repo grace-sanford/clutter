@@ -1,40 +1,43 @@
 "use client"
 import React from 'react';
 import Layout from '../../components/Layout'
+import Link from 'next/link'
 
 const About = () => {
   return (
     <Layout>
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+    <div className="flex flex-col h-screen">
       {/* Header */}
-      <p className="text-3xl font-bold mb-8 text-center text-green-600">
-        About Clutter Game
+      <div className="mt-0 flex items-center justify-center" style={{ minHeight: '5rem' }}>
+      <p className="text-center text-3xl items-center justify-center text-red-300">
+        About CLUTTER
       </p>
-
-      {/* Content */}
-      <div className="max-w-2xl text-center">
-        <p className="mb-4">
-          Clutter is an exciting game that challenges your strategic thinking and creativity. It's designed to bring fun and engagement to players of all ages.
-        </p>
-        <p className="mb-4">
-          Whether you're a seasoned gamer or just looking for a casual and enjoyable experience, Clutter offers a unique gameplay experience that keeps you coming back for more.
-        </p>
-        <p className="mb-4">
-          The game involves creating teams, managing players, and navigating through various challenges to achieve victory. With its intuitive interface and vibrant design, Clutter promises an immersive gaming adventure.
-        </p>
-        <p>
-          Join us on this journey and let Clutter be your go-to game for entertainment and friendly competition.
-        </p>
       </div>
 
-      {/* Footer */}
-      <div className="mt-auto text-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none p-8">
-        <div className="flex justify-center gap-1 text-sm">
-          <span>Code by</span>
-          <code className="font-mono font-bold">@gracesanford</code>
-        </div>
+      {/* Content */}
+      <div className="flex-grow flex flex-col items-center justify-center bg-blue-600 sm:bg-white md:bg-gray-700 lg:bg-green-600 xl:bg-red-300">
+        <p className="mb-1 font-bold text-2xl">
+          How do you play?
+        </p>
+        <p>No <em>rhythms with</em>..., <em>sounds like</em>..., or <em>starts with</em>...</p>
+        <p>No sounding out or spelling out names</p>
+        <p className="mb-6">Fictional, real, famous, regular, extradordinary, funny, serious, historical and contemporary names welcome</p>
+        <p className="mb-1 font-bold text-2xl">
+          Who invented CLUTTER?
+        </p>
+        <p className="mb-6">Depending on who you ask, my Mom's friend, Denise, my Mom's friend, Lindsey, my Mom, the family in <a className="underline" href="https://en.wikipedia.org/wiki/Dan_in_Real_Life" target="_blank"><em>Dan In Real Life</em></a>, or this game is  
+        actually just the first round of that other party game, <a className="underline" href="https://thenerdy.com/how-to-play-salad-bowl/" target="_blank">Salad Bowl</a></p>
+        <p className="mb-1 font-bold text-2xl">
+          What's the deal with this website?
+        </p>
+        <p className="mb-6">Developed with <a href='https://bun.sh/' target="_blank" 
+        className="underline" >Bun</a> and <a href='https://chat.openai.com/' className="underline" target="_blank">ChatGPT</a>, bootstraped with <a href="https://nextjs.org/" 
+        target="_blank" className="underline">NextJS</a> frontend and <a href='https://www.postgresql.org/' 
+        target="_blank" className="underline">PostreSQL</a> backend,
+        this project is the work of me, <a href='https://github.com/grace-sanford' target="_blank" className="underline font-mono font-bold">
+        @gracesanford</a>.</p>
         <div className="text-sm mt-2">
-          Line art by Kristina Margaryan from{' '}
+          landing page line art is courtesy of Kristina Margaryan from{' '}
           <a
             href="https://thenounproject.com/browse/icons/term/line-art/"
             className="underline"
@@ -45,8 +48,12 @@ const About = () => {
           </a>{' '}
           (CC BY 3.0)
         </div>
+        {/* "Play Clutter" button */}
+        <Link href="/" className="bg-green-500 text-white py-3 px-6 rounded-full font-bold text-xl mt-8">
+          Play CLUTTER
+          </Link>
       </div>
-    </div>
+      </div>
     </Layout>
   );
 };
