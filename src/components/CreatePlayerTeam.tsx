@@ -1,7 +1,7 @@
 "use client";
 // CreatePlayersTeamsForm.js
 import React, { useState } from "react";
-import { createPlayersAndTeams } from "../modules/hooks/useApi";
+import { createGame, createPlayersAndTeams } from "../modules/hooks/useApi";
 import { v4 } from "uuid";
 import { useRouter } from "next/router";
 
@@ -12,7 +12,7 @@ const CreatePlayersTeamsForm = () => {
   const [playerFields, setPlayerFields] = useState("");
   const router = useRouter();
 
-  let uuid = 0
+  let uuid = ''
 
   const getUuid = () => {
     uuid = v4();
@@ -69,14 +69,21 @@ const CreatePlayersTeamsForm = () => {
     router.push(`/games/${getUuid()}`);
     // Reset error
     setError(null);
-    const playerNames = playerFields;
+
     try {
-      const response = await createPlayersAndTeams({
+      //Create Game
+      const gameResponse = await createGame(uuid);
+      const gameId = gameResponse.id;
+      
+      //Create Players and Teams
+      const playerNames = playerFields;
+      const playersAndTeamsResponse = await createPlayersAndTeams({
         playerNames,
         numberOfTeams: parseInt(numberOfTeams, 10),
+        gameId,
       });
     } catch (error) {
-      console.error("Error creating players and teams:", error);
+      console.error("Error creating game OR players and teams:", error);
     }
   };
 

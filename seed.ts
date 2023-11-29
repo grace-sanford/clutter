@@ -26,7 +26,7 @@ const games = [
   },
   {
     id: 2,
-    uuid: 'ed933d70-d349-45d3-afa4-157c1a226b20'
+    uuid: 'ed933d70-d349-45d3-afa4-157c1a226b21'
   },
 ];
 
@@ -39,7 +39,12 @@ const teams = [
   {
     id: 2,
     Name: "Team 2",
-    gameId: 1
+    gameId: 2
+  },
+  {
+    id: 3,
+    Name: "Team 3",
+    gameId: 2
   }
 ];
 

@@ -14,19 +14,19 @@ const getGames = async () => {
   }
 };
 
-const createGame = async () => {
+const createGame = async (uuid: string) => {
   try {
-    const response = await api.post('/api/games');
+    const response = await api.post('/api/games', {uuid});
     return response.data;
   } catch (error) {
     throw error;
   }
 }
 
-const createPlayersAndTeams = async ({ playerNames, numberOfTeams }: { playerNames: string, numberOfTeams: number }) => {
+const createPlayersAndTeams = async ({ playerNames, numberOfTeams, gameId }: { playerNames: string, numberOfTeams: number, gameId: number }) => {
   try {
     const response = await api.post('/api/create-players-teams', {
-      playerNames, numberOfTeams
+      playerNames, numberOfTeams, gameId
     })
     return response.data
   } catch (error) {

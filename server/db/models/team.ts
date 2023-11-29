@@ -23,6 +23,10 @@ const initTeamModel = (sequelize: Sequelize) => {
       },
       gameId: {
         type: DataTypes.INTEGER,
+        references: {
+          model: 'Games', // This should match the actual model name of your Games table
+          key: 'id',
+        },
       }
     },
     {

@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { Player, Team, Game, TeamGame, db } from '../db'; // Adjust the path accordingly
+import { Player, Team, Game, db } from '../db'; // Adjust the path accordingly
 
 const router = express.Router();
 
@@ -15,7 +15,7 @@ const shuffleArray = (array: any[]) => {
 
 router.post('/', async (req: Request, res: Response) => {
   try {
-    const { playerNames, numberOfTeams } = req.body;
+    const { playerNames, numberOfTeams, gameId } = req.body;
 
     // Check if playerNames and numberOfTeams are provided
     if (!playerNames || !numberOfTeams) {
@@ -28,10 +28,12 @@ router.post('/', async (req: Request, res: Response) => {
     // Shuffle the players array
     const shuffledPlayers = shuffleArray(playersArray);
 
+    console.log("gameId", gameId)
+
     // Create teams
     const teams: any[] = [];
     for (let i = 0; i < numberOfTeams; i++) {
-      const team = await Team.create({ name: `Team ${i + 1}` });
+      const team = await Team.create({ name: `Team ${i + 1}`, gameId: gameId});
       teams.push(team);
     }
 
