@@ -2,6 +2,7 @@
 import React from 'react';
 import Layout from '../../components/Layout'
 import Link from 'next/link'
+import Image from 'next/image';
 
 const About = () => {
   return (
@@ -30,14 +31,52 @@ const About = () => {
         <p className="mb-1 font-bold text-2xl">
           What's the deal with this website?
         </p>
-        <p className="mb-6">Developed with <a href='https://bun.sh/' target="_blank" 
-        className="underline" >Bun</a> and <a href='https://chat.openai.com/' className="underline" target="_blank">ChatGPT</a>, bootstraped with <a href="https://nextjs.org/" 
+        <p className="mb-1">Developed with <a href='https://bun.sh/' target="_blank" 
+        className="underline" >Bun</a> and <a href='https://chat.openai.com/' className="underline" target="_blank">ChatGPT</a>, 
+        bootstraped with <a href="https://nextjs.org/" 
         target="_blank" className="underline">NextJS</a> frontend and <a href='https://www.postgresql.org/' 
         target="_blank" className="underline">PostreSQL</a> backend,
         this project is the work of me, <a href='https://github.com/grace-sanford' target="_blank" className="underline font-mono font-bold">
-        @gracesanford</a>.</p>
-        <div className="text-sm mt-2">
-          landing page line art is courtesy of Kristina Margaryan from{' '}
+        @gracesanford</a> </p> 
+        <div className='flex flex-row space-x-4 items-center'>
+  <a href="https://bun.sh/" target="_blank" rel="noreferrer">
+    <Image
+      src="/bun-logo.svg" 
+      alt="bun" 
+      width={50} 
+      height={50}
+      className="logo"
+    />
+  </a>
+  <a href="https://chat.openai.com/" target="_blank" rel="noreferrer">
+    <Image
+      src="/chatgpt-logo.svg" 
+      alt="postresql" 
+      width={50} 
+      height={50}
+      className="logo"
+    />
+  </a>
+  <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
+    <Image
+      src="/next-logo.svg" 
+      alt="postresql" 
+      width={50} 
+      height={50}
+      className="logo"
+    />
+  </a>
+  <a href="https://www.postgresql.org" target="_blank" rel="noreferrer">
+    <Image 
+      src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" 
+      alt="postgresql" 
+      width={50} 
+      height={50}
+      className="logo"
+    /> 
+  </a>
+</div>
+        <p>Landing page line art is courtesy of Kristina Margaryan from{' '}
           <a
             href="https://thenounproject.com/browse/icons/term/line-art/"
             className="underline"
@@ -46,8 +85,7 @@ const About = () => {
           >
             Noun Project
           </a>{' '}
-          (CC BY 3.0)
-        </div>
+          (CC BY 3.0)</p>
         {/* "Play Clutter" button */}
         <Link href="/" className="bg-green-500 text-white py-3 px-6 rounded-full font-bold text-xl mt-8">
           Play CLUTTER
