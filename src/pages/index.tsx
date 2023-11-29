@@ -9,15 +9,6 @@ import Layout from "../components/Layout";
 // import { v4 } from "uuid";
 
 export default function Home() {
-  const [showCreatePlayersTeamsForm, setShowCreatePlayersTeamsForm] =
-    useState(true);
-
-  // const getUuid = () => {
-  //   const uuid = v4();
-  //   console.log(uuid);
-  //   return uuid;
-  // };
-
   return (
     <Layout>
       <div className="flex flex-col h-screen">
@@ -35,38 +26,28 @@ export default function Home() {
           className="flex-grow flex flex-col items-center justify-center bg-blue-600 sm:bg-white md:bg-gray-700 lg:bg-green-600 xl:bg-red-300"
           style={{ minHeight: "100vh", overflowY: "auto" }}
         >
-          {/* Components */}
-          {/* Components */}
-          {/* {showCreatePlayersTeamsForm ? ( */}
-            <>
-              {/* Image */}
-              <div className="relative mt-20">
-                <Image
-                  src="/posh-face.png"
-                  alt="Face Icon"
-                  className="dark:invert"
-                  width={275}
-                  height={100}
-                  priority
-                />
-              </div>
-              {/* Position the CreatePlayersTeamsForm underneath the Image */}
-              <div className="flex-grow flex justify-center items-top p-8 mt-15">
-                <CreatePlayersTeamsForm
-                  showCreatePlayersTeamsForm={showCreatePlayersTeamsForm}
-                  setShowCreatePlayersTeamsForm={setShowCreatePlayersTeamsForm}
-                />
-              </div>
-            </>
-          {/* // ) : (
-          //   <Link href={`/games/${getUuid}`}>
-          //   </Link>
-          // )} */}
+          <>
+            {/* Image */}
+            <div className="relative mt-20">
+              <Image
+                src="/posh-face.png"
+                alt="Face Icon"
+                className="dark:invert"
+                width={275}
+                height={100}
+                priority
+              />
+            </div>
+            {/* Position the CreatePlayersTeamsForm underneath the Image */}
+            <div className="flex-grow flex justify-center items-top p-8 mt-15">
+              <CreatePlayersTeamsForm />
+            </div>
+          </>
         </div>
 
         {/* Footer */}
         <div
-         //<CreateGame/>
+          //<CreateGame/>
           className="flex flex-row items-center justify-center gap-2 p-8 lg:p-0 text-sm mb-2 mt-2 text-black"
           style={{ minHeight: "10vh" }}
         >

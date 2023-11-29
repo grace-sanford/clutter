@@ -5,14 +5,8 @@ import { createPlayersAndTeams } from "../modules/hooks/useApi";
 import { v4 } from "uuid";
 import { useRouter } from "next/router";
 
-const CreatePlayersTeamsForm = ({
-  showCreatePlayersTeamsForm,
-  setShowCreatePlayersTeamsForm,
-}: {
-  showCreatePlayersTeamsForm: boolean;
-  setShowCreatePlayersTeamsForm: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
-  const [error, setError] = useState<React.ReactElement>(<></>);
+const CreatePlayersTeamsForm = () => {
+  const [error, setError] = useState<React.ReactNode | null>(null);
   const [numberOfPlayers, setNumberOfPlayers] = useState(0);
   const [numberOfTeams, setNumberOfTeams] = useState("");
   const [playerFields, setPlayerFields] = useState("");
@@ -54,24 +48,25 @@ const CreatePlayersTeamsForm = ({
 
     if (playerFields.split(",").some((player) => player.trim() === "")) {
       setError(
-        <>
-          * Please fill in at least <br /> four players
-        </>
+        <span>
+          <span style={{ display: 'block' }}>* Please fill in at least</span>
+          <span style={{ display: 'block' }}>four players</span>
+        </span>
       );
       return;
     }
     if (!numberOfTeams || parseInt(numberOfTeams, 10) === 0) {
       setError(
-        <>
-          * Please select the <br /> number of teams
-        </>
+        <span>
+          <span style={{ display: 'block' }}>* Please select the</span>
+          <span style={{ display: 'block' }}>number of teams</span>
+        </span>
       );
       return;
     }
-    setShowCreatePlayersTeamsForm(false);
     router.push(`/games/${getUuid()}`);
     // Reset error
-    setError(<html />);
+    setError(null);
     const playerNames = playerFields;
     try {
       const response = await createPlayersAndTeams({
