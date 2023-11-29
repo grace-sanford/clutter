@@ -6,10 +6,17 @@ import CreatePlayersTeamsForm from "@/components/CreatePlayerTeam";
 import React, { useState } from "react";
 import Link from "next/link";
 import Layout from "../components/Layout";
+// import { v4 } from "uuid";
 
 export default function Home() {
   const [showCreatePlayersTeamsForm, setShowCreatePlayersTeamsForm] =
     useState(true);
+
+  // const getUuid = () => {
+  //   const uuid = v4();
+  //   console.log(uuid);
+  //   return uuid;
+  // };
 
   return (
     <Layout>
@@ -30,7 +37,7 @@ export default function Home() {
         >
           {/* Components */}
           {/* Components */}
-          {showCreatePlayersTeamsForm ? (
+          {/* {showCreatePlayersTeamsForm ? ( */}
             <>
               {/* Image */}
               <div className="relative mt-20">
@@ -51,15 +58,17 @@ export default function Home() {
                 />
               </div>
             </>
-          ) : (
-            <CreateGame />
-          )}
+          {/* // ) : (
+          //   <Link href={`/games/${getUuid}`}>
+          //   </Link>
+          // )} */}
         </div>
 
         {/* Footer */}
         <div
-          className="flex flex-col items-center justify-center gap-2 p-8 lg:p-0 text-sm mb-2 mt-2 text-black"
-          style={{ minHeight: "20vh" }}
+         //<CreateGame/>
+          className="flex flex-row items-center justify-center gap-2 p-8 lg:p-0 text-sm mb-2 mt-2 text-black"
+          style={{ minHeight: "10vh" }}
         >
           <span className="lg:whitespace-nowrap">code by</span>
           <code className="font-mono font-bold whitespace-nowrap lg:ml-2">

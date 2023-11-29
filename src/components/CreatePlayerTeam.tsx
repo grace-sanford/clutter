@@ -2,6 +2,8 @@
 // CreatePlayersTeamsForm.js
 import React, { useState } from "react";
 import { createPlayersAndTeams } from "../modules/hooks/useApi";
+import { v4 } from "uuid";
+import { useRouter } from "next/router";
 
 const CreatePlayersTeamsForm = ({
   showCreatePlayersTeamsForm,
@@ -14,6 +16,13 @@ const CreatePlayersTeamsForm = ({
   const [numberOfPlayers, setNumberOfPlayers] = useState(0);
   const [numberOfTeams, setNumberOfTeams] = useState("");
   const [playerFields, setPlayerFields] = useState("");
+  const router = useRouter();
+
+  const getUuid = () => {
+    const uuid = v4();
+    console.log(uuid);
+    return uuid;
+  };
 
   const handleNumberOfPlayersChange = (
     e: React.ChangeEvent<HTMLSelectElement>
@@ -60,6 +69,7 @@ const CreatePlayersTeamsForm = ({
       return;
     }
     setShowCreatePlayersTeamsForm(false);
+    router.push(`/games/${getUuid()}`);
     // Reset error
     setError(<html />);
     const playerNames = playerFields;
