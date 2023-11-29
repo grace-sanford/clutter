@@ -2,7 +2,7 @@
 
 // CreateGame.tsx
 import React, { useState } from 'react';
-import { createGame } from '@/modules/hooks/useApi';
+import { getGames } from '@/modules/hooks/useApi';
 import Image from 'next/image';
 
 const CreateGame = () => {
@@ -15,7 +15,7 @@ const CreateGame = () => {
     setLoading(true);
 
     try {
-      const data = await createGame();
+      const data = await getGames();
       setGameId(data.gameId);
     } catch (err) {
       setError(err as Error);

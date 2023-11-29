@@ -16,7 +16,6 @@ const CreatePlayersTeamsForm = () => {
 
   const getUuid = () => {
     uuid = v4();
-    console.log(uuid);
     return uuid;
   };
 

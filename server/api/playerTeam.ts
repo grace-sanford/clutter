@@ -56,5 +56,39 @@ router.post('/', async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Internal server error.' });
   }
 });
+
+router.get('/:gameId', async (req: Request, res: Response) => {
+  try {
+    const { gameId } = req.params;
+    console.log("gameId", gameId)
+
+    // Find all teams for the given gameId
+    const teams = await Team.findAll({ where: { gameId: gameId } });
+    console.log("teams", teams);
+
+    if (!teams || teams.length === 0) {
+      // If teams is empty or undefined, handle the case accordingly
+      console.log("No teams found for gameId:", gameId);
+      return res.status(404).json({ error: 'No teams found for the given gameId.' });
+    }
+
+    const teamIds = [];
+    // Extract teamIds from the teams array
+    for (let team of teams){
+      teamIds.push(team.id);
+    }
+    console.log("teamIds", teamIds)
+
+    // Find all players whose teamId is in the teamIds array
+    const players = await Player.findAll({ where: { teamId: teamIds } });
+    console.log("players", players)
+
+    res.status(201).json({players, teams})
+
+  } catch (error) {
+    console.error('Error getting players and teams:', error);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+});
   
-  export default router;
+export default router;
