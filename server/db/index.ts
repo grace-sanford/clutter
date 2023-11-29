@@ -8,8 +8,8 @@ const seed = require("../../seed")
 
 // Initialize the models
 const Player = initPlayerModel1(db);
-const Team = initTeamModel(db)
 const Game = initGameModel(db);
+const Team = initTeamModel(db)
 const Name = initNameModel(db);
 
 // Define associations
