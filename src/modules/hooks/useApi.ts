@@ -19,7 +19,7 @@ const createGame = async () => {
     const response = await api.post('/api/games');
     return response.data;
   } catch (error) {
-
+    throw error;
   }
 }
 
