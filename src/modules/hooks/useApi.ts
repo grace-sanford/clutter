@@ -5,7 +5,7 @@ const api = axios.create({
   baseURL: 'http://localhost:8000', // Replace with your actual API base URL
 });
 
-const createGame = async () => {
+const getGames = async () => {
   try {
     const response = await api.get('/api/games');
     return response.data;
@@ -13,6 +13,15 @@ const createGame = async () => {
     throw error;
   }
 };
+
+const createGame = async () => {
+  try {
+    const response = await api.post('/api/games');
+    return response.data;
+  } catch (error) {
+
+  }
+}
 
 const createPlayersAndTeams = async ({ playerNames, numberOfTeams }: { playerNames: string, numberOfTeams: number }) => {
   try {
