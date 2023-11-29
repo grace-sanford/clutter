@@ -16,6 +16,9 @@ const initGameModel = (sequelize: Sequelize) => {
         primaryKey: true,
         autoIncrement: true
       },
+      uuid: {
+        type: DataTypes.STRING(50)
+      },
     },
     {
       sequelize,

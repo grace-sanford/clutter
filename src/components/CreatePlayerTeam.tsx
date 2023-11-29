@@ -12,8 +12,10 @@ const CreatePlayersTeamsForm = () => {
   const [playerFields, setPlayerFields] = useState("");
   const router = useRouter();
 
+  let uuid = 0
+
   const getUuid = () => {
-    const uuid = v4();
+    uuid = v4();
     console.log(uuid);
     return uuid;
   };

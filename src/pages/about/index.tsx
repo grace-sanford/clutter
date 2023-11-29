@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const About = () => {
   return (
-    <Layout>
+    <Layout pageTitle={'Clutter | About'}>
     <div className="flex flex-col h-screen">
       {/* Header */}
       <div className="mt-0 flex items-center justify-center" style={{ minHeight: '5rem' }}>

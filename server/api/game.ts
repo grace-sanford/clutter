@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', async (req: Request, res: Response) => {
 try {
-    const response = await Game.findAll({attributes: ['ID', 'createdAt']});
+    const response = await Game.findAll({attributes: ['id', 'createdAt']});
     res.send(response);
   } catch (error) {
     console.error("Error getting games:", error);

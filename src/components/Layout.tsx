@@ -15,7 +15,7 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
         <title>{pageTitle || 'Clutter'}</title>
         <link rel="preload" href="/fonts/NeueMontreal-Regular.otf" as="font" crossOrigin="" />
         <link rel="preload" href="/fonts/NeueMontreal-Bold.otf" as="font" crossOrigin="" />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon-bowl.ico" sizes="any" />
       </Head>
       <div>{children}</div>
     </>

@@ -1,17 +1,17 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
-interface TeamAttributes {
+interface NameAttributes {
   id: number;
   name: string;
 }
 
-class Team extends Model<TeamAttributes> implements TeamAttributes {
+class NameModel extends Model<NameAttributes> implements NameAttributes {
   public id!: number;
   public name!: string;
 }
 
-const initTeamModel = (sequelize: Sequelize) => {
-  Team.init(
+const initNameModel = (sequelize: Sequelize) => {
+  NameModel.init(
     {
       id: {
         type: DataTypes.INTEGER,
@@ -27,10 +27,10 @@ const initTeamModel = (sequelize: Sequelize) => {
     },
     {
       sequelize,
-      modelName: 'Team',
-      tableName: 'Teams',
+      modelName: 'Name',
+      tableName: 'Names',
     }
   );
 };
 
-export { Team, initTeamModel };
+export { NameModel, initNameModel };

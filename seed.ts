@@ -1,6 +1,6 @@
-const { Player, Game, Team, TeamGame } = require("./server/db");
+const { Player, Game, Team, Name } = require("./server/db");
 const db = require("./server/db/database").default;
-const Sequelize = require("sequelize")
+const Sequelize = require("sequelize");
 const chalk = require('chalk');
 const figlet = require('figlet');
 
@@ -22,56 +22,55 @@ const players = [
 const games = [
   {
     id: 1,
+    uuid: 'ed933d70-d349-45d3-afa4-157c1a226b20'
   },
   {
     id: 2,
+    uuid: 'ed933d70-d349-45d3-afa4-157c1a226b20'
   },
 ];
 
 const teams = [
   {
     id: 1,
-    Name: "Team 1"
+    Name: "Team 1",
+    gameId: 1
   },
   {
     id: 2,
-    Name: "Team 2"
+    Name: "Team 2",
+    gameId: 1
   }
-]
+];
 
-// Sample player games
-const teamGames = [
+const names = [
   {
-    teamId: 1,
+    id: 1,
+    name: "John Doe",
     gameId: 1,
-    score: 100,
   },
   {
-    teamId: 1,
-    gameId: 2,
-    score: 75,
+    id: 2,
+    name: "Jane Doe",
+    gameId: 1,
   },
-  {
-    teamId: 2,
-    gameId: 2,
-    score: 100
-  }
 ];
 
 const seed = async () => {
   try {
     await db.sync({ force: true });
 
+    // Seed Games
+    await Game.bulkCreate(games);
+
     // Seed Teams
-    await Team.bulkCreate(teams)
+    await Team.bulkCreate(teams);
 
     // Seed Players
     await Player.bulkCreate(players);
 
-    // Seed Games
-    await Game.bulkCreate(games);
-
-    await TeamGame.bulkCreate(teamGames);
+    // Seed Names
+    await Name.bulkCreate(names);
   } catch (err) {
     console.error(err);
   }
@@ -82,7 +81,7 @@ async function runSeed() {
   try {
     await seed();
     const successMessage = "Seeding success!";
-    figlet(successMessage, function (err: any, data: any) {
+    figlet(successMessage, function (err, data) {
       if (err) {
         console.error(err);
         return;
