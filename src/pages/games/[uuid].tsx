@@ -21,19 +21,12 @@ const GamePage = () => {
       try {
         if (typeof uuid === 'string') {
           const game = await getGame(uuid)
-          const gameId = game.id
-          if (game) {
             const gameId = game.id;
-            console.log("gameId", gameId);
-  
-            const data = await getPlayersAndTeams(gameId);
-            // Continue with the rest of your logic using 'data'
-          } else {
-            throw new Error('Game not found');
-          }
+            if (gameId) {
+              const data = await getPlayersAndTeams(gameId);
+            }
         } else {
-          // Handle the case where uuid is undefined or not a string
-          throw new Error('uuid is undefined or not a string');
+          //pass
         }
       } catch (err) {
         setError(err as Error);
@@ -84,7 +77,6 @@ const GamePage = () => {
         {copySuccess && <p className="text-green-500 mt-2">{copySuccess}</p>}
 
         {error && <div>Error: {error.message}</div>}
-        {uuid && <div>Game created successfully with ID: {uuid}</div>}
       </div>
     </Layout>
   );

@@ -55,8 +55,8 @@ const createPlayersAndTeams = async ({
 
 const getPlayersAndTeams = async (gameId: number) => {
   try {
-    console.log("gameId axios", gameId)
     const response = await api.get(`/api/players-teams/${gameId}`);
+    console.log(response)
     return response.data;
   } catch (error) {
     throw error;
