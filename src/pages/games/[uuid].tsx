@@ -3,8 +3,7 @@
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
-import { getGame, getPlayersAndTeams } from "@/modules/hooks/useApi";
+import React, { useState } from "react";
 
 interface Team {
   id: number;
@@ -22,89 +21,113 @@ interface Player {
 }
 
 const GamePage = () => {
-  const [gameName, setGameName] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
-  const [teams, setTeams] = useState<Team[]>([]);
+  const [numNames, setNumNames] = useState(3);
+  const [copySuccess, setCopySuccess] = useState("");
 
   const router = useRouter();
   const { uuid } = router.query;
 
-  useEffect(() => {
-    const handleCreateGame = async () => {
-      setLoading(true);
-
-      try {
-        if (typeof uuid === "string") {
-          const game = await getGame(uuid);
-          const gameId = game.id;
-          if (gameId) {
-            const data = await getPlayersAndTeams(gameId);
-            setTeams(data.teams);
-          }
-        } else {
-          //pass
-        }
-      } catch (err) {
-        setError(err as Error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    handleCreateGame();
-  }, [uuid]);
-
-  const [copySuccess, setCopySuccess] = useState("");
-  const textRef = useRef(null);
-
-  const copyToClipboard = () => {
-    textRef.current.select();
-    document.execCommand("copy");
-    setCopySuccess("Copied!");
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(`http://localhost:3000/games/${uuid}`);
+      setCopySuccess("Copied!");
+    } catch (err) {
+      console.error('Error copying to clipboard:', err);
+      setCopySuccess("Copy failed");
+    }
   };
 
+  const handleNumNamesChange = (e) => {
+    setNumNames(Number(e.target.value));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log("Submitted names:", names);
+  };
+
+  const names = Array.from(
+    { length: numNames },
+    (_, index) => `Name ${index + 1}`
+  );
+
   return (
-    <Layout pageTitle={"Clutter | Play"}>
-      <div className="flex flex-col items-center mb-4">
-        <Image
-          src="/bowl.svg"
-          alt="Bowl Icon"
-          className="dark:invert"
-          width={100}
-          height={24}
-          priority
-        />
-        <h1>Game Page</h1>
-        <p>Game ID: {uuid}</p>
-      </div>
-      <div className="mt-4">
-        <input
-          type="text"
-          ref={textRef}
-          readOnly
-          value={`http://localhost:3000/games/${uuid}`}
-          className="border p-2 w-full"
-        />
-        <button
-          className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={copyToClipboard}
-        >
-          Copy Link
-        </button>
-        {copySuccess && <p className="text-green-500 mt-2">{copySuccess}</p>}
-        {teams
-          ? teams.map((team) => (
-              <div key={team.id}>
-                <p>{team.name}</p>
-                <ul>
-                  {team.Players.map((player) => (
-                    <li key={player.id}>{player.username}</li>
+    <Layout pageTitle={'Clutter | Play'}>
+      <div className="flex flex-col items-center mt-10 px-3">
+        <div className="mt-4">
+        <div className="text-blue-500 mb-4">1. Copy the link and share it with your friends</div>
+          <input
+            type="text"
+            readOnly
+            value={`http://localhost:3000/games/${uuid}`}
+            className="border p-2 w-full"
+          />
+          <button
+            className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            onClick={copyToClipboard}
+          >
+            Copy Link
+          </button>
+          {copySuccess && <p className="text-green-500 mt-2">{copySuccess}</p>}
+          <div className="mt-6 text-blue-500">2. Add names </div>
+          <div className="mt-1 items-center">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col items-center"
+            >
+              <label className="mb-2">
+                Number of Names:
+                <select
+                  value={numNames}
+                  onChange={handleNumNamesChange}
+                  className="ml-2"
+                >
+                  {[3, 4, 5].map((num) => (
+                    <option key={num} value={num}>
+                      {num}
+                    </option>
                   ))}
-                </ul>
-              </div>
-            ))
-          : ""}
-        {error && <div>Error: {error.message}</div>}
+                </select>
+              </label>
+              {names.map((name, index) => (
+                <div key={index} className="mb-2">
+                  <label>
+                    <input type="text" placeholder={name} className="ml-2 p-1 border rounded" />
+                  </label>
+                </div>
+              ))}
+              <button
+                type="submit"
+                className="mt-4 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded"
+              >
+                Submit
+              </button>
+            </form>
+            <div className="mt-4 flex justify-center">
+              <Image
+                src="/bowl.svg"
+                alt="Bowl Icon"
+                className="dark:invert"
+                width={200}
+                height={24}
+                priority
+              />
+            </div>
+          </div>
+          {error && (
+            <div className="mt-4 text-red-500 text-center">Error: {error.message}</div>
+          )}
+          <div className="mt-4 text-blue-500 mb-10">
+            3. Once everyone has added their names to the bowl, have the game
+            leader{' '}
+            <button type="button" className="underline">
+              continue to game play
+            </button>
+            !
+          </div>
+        </div>
       </div>
     </Layout>
   );
