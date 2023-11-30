@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
 import Image from "next/image";
 import React, { useState } from "react";
+import Link from "next/link";
 
 interface Team {
   id: number;
@@ -30,10 +31,12 @@ const GamePage = () => {
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(`http://localhost:3000/games/${uuid}`);
+      await navigator.clipboard.writeText(
+        `http://localhost:3000/games/${uuid}`
+      );
       setCopySuccess("Copied!");
     } catch (err) {
-      console.error('Error copying to clipboard:', err);
+      console.error("Error copying to clipboard:", err);
       setCopySuccess("Copy failed");
     }
   };
@@ -54,10 +57,12 @@ const GamePage = () => {
   );
 
   return (
-    <Layout pageTitle={'Clutter | Play'}>
+    <Layout pageTitle={"Clutter | Play"}>
       <div className="flex flex-col items-center mt-10 px-3">
         <div className="mt-4">
-        <div className="text-blue-500 mb-4">1. Copy the link and share it with your friends</div>
+          <div className="text-blue-500 mb-4">
+            1. Copy the link and share it with your friends
+          </div>
           <input
             type="text"
             readOnly
@@ -94,7 +99,11 @@ const GamePage = () => {
               {names.map((name, index) => (
                 <div key={index} className="mb-2">
                   <label>
-                    <input type="text" placeholder={name} className="ml-2 p-1 border rounded" />
+                    <input
+                      type="text"
+                      placeholder={name}
+                      className="ml-2 p-1 border rounded"
+                    />
                   </label>
                 </div>
               ))}
@@ -117,14 +126,16 @@ const GamePage = () => {
             </div>
           </div>
           {error && (
-            <div className="mt-4 text-red-500 text-center">Error: {error.message}</div>
+            <div className="mt-4 text-red-500 text-center">
+              Error: {error.message}
+            </div>
           )}
           <div className="mt-4 text-blue-500 mb-10">
             3. Once everyone has added their names to the bowl, have the game
-            leader{' '}
-            <button type="button" className="underline">
+            leader{" "}
+            <Link className="underline" href={`/play/${uuid}`}>
               continue to game play
-            </button>
+            </Link>
             !
           </div>
         </div>
