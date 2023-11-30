@@ -65,7 +65,7 @@ router.get('/:gameId', async (req: Request, res: Response) => {
       where: { gameId: gameId },
       include: [{ model: Player }],
     });
-    res.status(200).json({teams})
+    res.status(200).json(teams)
   } catch (error) {
     console.error('Error getting players and teams:', error);
     res.status(500).json({ error: 'Internal server error.' });

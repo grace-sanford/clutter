@@ -6,10 +6,26 @@ import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { getGame, getPlayersAndTeams } from "@/modules/hooks/useApi";
 
+interface Team {
+  id: number;
+  name: string;
+  gameId: number;
+  createdAt: string;
+  Players: Player[];
+}
+
+interface Player {
+  id: number;
+  username: string;
+  teamId: number;
+  createdAt: string;
+}
+
 const GamePage = () => {
   const [gameName, setGameName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
+  const [teams, setTeams] = useState<Team[]>([]);
 
   const router = useRouter();
   const { uuid } = router.query;
@@ -19,12 +35,13 @@ const GamePage = () => {
       setLoading(true);
 
       try {
-        if (typeof uuid === 'string') {
-          const game = await getGame(uuid)
-            const gameId = game.id;
-            if (gameId) {
-              const data = await getPlayersAndTeams(gameId);
-            }
+        if (typeof uuid === "string") {
+          const game = await getGame(uuid);
+          const gameId = game.id;
+          if (gameId) {
+            const data = await getPlayersAndTeams(gameId);
+            setTeams(data.teams);
+          }
         } else {
           //pass
         }
@@ -75,7 +92,18 @@ const GamePage = () => {
           Copy Link
         </button>
         {copySuccess && <p className="text-green-500 mt-2">{copySuccess}</p>}
-
+        {teams
+          ? teams.map((team) => (
+              <div key={team.id}>
+                <p>{team.name}</p>
+                <ul>
+                  {team.Players.map((player) => (
+                    <li key={player.id}>{player.username}</li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          : ""}
         {error && <div>Error: {error.message}</div>}
       </div>
     </Layout>
