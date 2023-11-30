@@ -63,4 +63,14 @@ const getPlayersAndTeams = async (gameId: number) => {
   }
 };
 
-export { createGame, getGame, getGames, getPlayersAndTeams, createPlayersAndTeams };
+const createNames = async (gameId: number, names: String[]) => {
+  try {
+    const response = await api.post(`/api/names`, {names, gameId})
+    console.log(response);
+    return response.data;
+  } catch (error){
+    throw error;
+  }
+};
+
+export { createGame, getGame, getGames, getPlayersAndTeams, createPlayersAndTeams, createNames };

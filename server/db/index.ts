@@ -3,7 +3,7 @@ import db from './database';
 import { PlayerModel as NewImportedPlayer, initPlayerModel1 } from './models/player';
 import { Team as NewImportedTeam, initTeamModel } from "./models/team"
 import { Game as NewImportedGame, initGameModel } from './models/game';
-import { NameModel as NewImportedName, initNameModel } from './models/names';
+import { NameModel as NewImportedName, initNameModel } from './models/name';
 const seed = require("../../seed")
 
 // Initialize the models
