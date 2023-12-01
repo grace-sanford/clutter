@@ -23,12 +23,12 @@ export default function Home() {
         </div>
         {/* Main Content */}
         <div
-          className="flex-grow flex flex-col items-center justify-center bg-blue-600 sm:bg-white md:bg-gray-700 lg:bg-green-600 xl:bg-red-300"
+          className="flex-grow flex flex-row items-center justify-center bg-blue-600 sm:bg-white md:bg-gray-700 lg:bg-green-600 xl:bg-red-300"
           style={{ minHeight: "100vh", overflowY: "auto" }}
         >
           <>
             {/* Image */}
-            <div className="relative mt-20">
+            <div className="relative flex-grow flex justify-center">
               <Image
                 src="/posh-face.png"
                 alt="Face Icon"

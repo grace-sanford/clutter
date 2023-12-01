@@ -28,22 +28,58 @@ body {
 }
 
 @font-face {
-    font-family: "Neue Montreal";
-    src: url("/fonts/NeueMontreal-Regular.otf");
-    crossorigin: "anonymous";
+  font-family: "Neue Montreal";
+  src: url("/fonts/NeueMontreal-Regular.otf");
+  crossorigin: "anonymous";
 }
 @font-face {
-    font-family: "Neue Montreal Bold";
-    src: url("/fonts/NeueMontreal-Bold.otf");
-    crossorigin: "anonymous";
+  font-family: "Neue Montreal Bold";
+  src: url("/fonts/NeueMontreal-Bold.otf");
+  crossorigin: "anonymous";
 }
 @font-face {
-    font-family: "Neue Montreal Light";
-    src: url("/fonts/NeueMontreal-Light.otf");
-    crossorigin: "anonymous";
+  font-family: "Neue Montreal Light";
+  src: url("/fonts/NeueMontreal-Light.otf");
+  crossorigin: "anonymous";
 }
 @font-face {
-    font-family: "Neue Montreal Medium";
-    src: url("/fonts/NeueMontreal-Medium.otf");
-    crossorigin: "anonymous";
+  font-family: "Neue Montreal Medium";
+  src: url("/fonts/NeueMontreal-Medium.otf");
+  crossorigin: "anonymous";
+}
+
+.modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 400px;
+  max-height: 500px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+/* Styles for larger screens (lg breakpoint) */
+@media (min-width: 1024px) {
+  .modal-content {
+    left: auto; /* Reset left to default */
+    right: 10%; /* Adjust the right position as needed */
+    transform: translate(0, -50%);
+  }
+}
+
+.modal-overlay {
+  background-color: rgba(250, 247, 247, 0.85); /* Adjust the overlay color and transparency */
+}
+
+.absolute {
+  position: absolute;
+}
+.top-2 {
+  top: 2px;
+}
+.right-2 {
+  right: 2px;
 }

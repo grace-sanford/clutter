@@ -65,9 +65,10 @@ const getPlayersAndTeams = async (gameId: number) => {
 
 const createNames = async (gameId: number, names: String[]) => {
   try {
+    console.log({names})
     const response = await api.post(`/api/names`, {names, gameId})
     console.log(response);
-    return response.data;
+    return response;
   } catch (error){
     throw error;
   }
