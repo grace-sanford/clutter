@@ -46,24 +46,17 @@ const GamePage = () => {
     setNumNames(Number(e.target.value));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Submitted names:", names);
-  };
-
-  const names = Array.from(
-    { length: numNames },
-    (_, index) => `Name ${index + 1}`
-  );
-
-  const handleCreateGame = async () => {
     try {
       if (typeof uuid === "string") {
         const game = await getGame(uuid);
         const gameId = game.id;
+        console.log({gameId})
         if (gameId) {
+          console.log({names})
           const data = await createNames(gameId, names);
+          console.log({data})
         }
       } else {
         //pass
@@ -71,6 +64,12 @@ const GamePage = () => {
     } catch (err) {
       setError(err as Error);
     }
+  };
+
+  const names = Array.from(
+    { length: numNames },
+    (_, index) => `Name ${index + 1}`
+  );
 
     return (
       <Layout pageTitle={"Clutter | Play"}>
@@ -161,6 +160,6 @@ const GamePage = () => {
       </Layout>
     );
   };
-};
+
 
 export default GamePage;
