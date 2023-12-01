@@ -8,12 +8,6 @@ const About = () => {
   return (
     <Layout pageTitle={'Clutter | About'}>
     <div className="flex flex-col h-screen">
-      {/* Header */}
-      <div className="mt-0 flex items-center justify-center" style={{ minHeight: '5rem' }}>
-      <p className="text-center text-3xl items-center justify-center text-red-300">
-        About CLUTTER
-      </p>
-      </div>
 
       {/* Content */}
       <div className="flex-grow flex flex-col items-center justify-center bg-blue-600 sm:bg-white md:bg-gray-700 lg:bg-green-600 xl:bg-red-300">

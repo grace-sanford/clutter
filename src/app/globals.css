@@ -83,3 +83,16 @@ body {
 .right-2 {
   right: 2px;
 }
+
+.centered-modal-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%; /* Adjust the width as needed */
+  max-width: 400px; /* Set a maximum width if desired */
+  max-height: 600px;
+  padding: 20px; /* Add padding for better appearance */
+  background-color: white;
+  border-radius: 10px;
+}

@@ -7,7 +7,8 @@ import { useRouter } from "next/router";
 import Modal from "react-modal";
 
 const CreatePlayersTeamsForm = () => {
-  const [error, setError] = useState<React.ReactNode | null>(null);
+  const [error, setError] = useState<Error | null>(null);
+  // const [error, setError] = useState<React.ReactNode | null>(null);
   const [numberOfPlayers, setNumberOfPlayers] = useState(4);
   const [numberOfTeams, setNumberOfTeams] = useState("");
   const [playerFields, setPlayerFields] = useState("");
@@ -51,19 +52,13 @@ const CreatePlayersTeamsForm = () => {
 
     if (playerFields.split(",").some((player) => player.trim() === "")) {
       setError(
-        <span>
-          <span style={{ display: "block" }}>* Please fill in at least</span>
-          <span style={{ display: "block" }}>four players</span>
-        </span>
+        new Error("Please enter at least four players before submitting.")
       );
       return;
     }
     if (!numberOfTeams || parseInt(numberOfTeams, 10) === 0) {
       setError(
-        <span>
-          <span style={{ display: "block" }}>* Please select the</span>
-          <span style={{ display: "block" }}>number of teams</span>
-        </span>
+        new Error("Please select the number of teams with which you wish to play.")
       );
       return;
     }
@@ -94,33 +89,34 @@ const CreatePlayersTeamsForm = () => {
 
   const closeModal = () => {
     setModalIsOpen(false);
+    setError(null);
   };
 
   return (
     <div className="flex flex-col items-center mb-4">
-      <button onClick={openModal}>Get started</button>
+      <button className="text-white text-bold" onClick={openModal}>Get started</button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Example Modal"
         className="modal-content overflow-y-auto modal-overlay"
       >
-        <label className="mb-1 text-gray-500">
-          How many players?{" "}
-          <select
-            value={numberOfPlayers}
-            onChange={handleNumberOfPlayersChange}
-            className="bg-white rounded p-2"
-            required
-          >
-            {["-", 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map(
-              (option) => (
+        <label className="text-gray-500">
+          <div className="mb-2">
+            How many players?{" "}
+            <select
+              value={numberOfPlayers}
+              onChange={handleNumberOfPlayersChange}
+              className="ml-2 p-1 border rounded"
+              required
+            >
+              {["-", 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map((option) => (
                 <option key={option} value={option}>
                   {option}
                 </option>
-              )
-            )}
-          </select>
+              ))}
+            </select>
+          </div>
         </label>
         <form onSubmit={handleFormSubmit}>
           {[...Array(numberOfPlayers)].map((_, index) => (
@@ -133,7 +129,7 @@ const CreatePlayersTeamsForm = () => {
                   newPlayerFields[index] = e.target.value;
                   handlePlayerChange(newPlayerFields);
                 }}
-                className="bg-white rounded p-2"
+                className="ml-2 p-1 border rounded mt-1"
               />
             </div>
           ))}
@@ -149,7 +145,7 @@ const CreatePlayersTeamsForm = () => {
                   setNumberOfTeams(e.target.value);
                 }
               }}
-              className="bg-white rounded p-2"
+              className="ml-2 p-1 border rounded"
               required
             >
               {["-", 2, 3, 4, 5, 6].map((option) => (
@@ -159,7 +155,11 @@ const CreatePlayersTeamsForm = () => {
               ))}
             </select>
           </label>
-          {error && <p className="text-red-500 text-sm mt-5">{error}</p>}
+          {error && (
+            <div className="mt-4 text-red-500 text-center">
+              Error: {error.message}
+            </div>
+          )}
           <br />
           <div className="text-center mt-4">
             <button className="font-bold" type="submit">
@@ -167,7 +167,12 @@ const CreatePlayersTeamsForm = () => {
             </button>
           </div>
         </form>
-        <button className="absolute top-4 right-4 text-gray-500" onClick={closeModal}>X</button>
+        <button
+          className="absolute top-4 right-4 text-gray-500"
+          onClick={closeModal}
+        >
+          X
+        </button>
       </Modal>
     </div>
   );

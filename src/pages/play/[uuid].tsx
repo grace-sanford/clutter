@@ -58,6 +58,7 @@ const PlayPage = () => {
   return (
     <Layout pageTitle={"Clutter | Play"}>
       <div>
+        Get with your teams!
         {teams.map((t) => (
           <div key={t.id}>
             {t.name}
@@ -68,6 +69,10 @@ const PlayPage = () => {
             </div>
           </div>
         ))}
+        <div>How many seconds will you allow for guessing?</div>
+        Pass one device to the person who is giving clues. 
+        First up, from team __ is __.
+        <div><button>Draw</button></div>
       </div>
     </Layout>
   );
