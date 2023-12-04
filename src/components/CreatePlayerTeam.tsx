@@ -8,7 +8,6 @@ import Modal from "react-modal";
 
 const CreatePlayersTeamsForm = () => {
   const [error, setError] = useState<Error | null>(null);
-  // const [error, setError] = useState<React.ReactNode | null>(null);
   const [numberOfPlayers, setNumberOfPlayers] = useState(4);
   const [numberOfTeams, setNumberOfTeams] = useState("");
   const [playerFields, setPlayerFields] = useState("");

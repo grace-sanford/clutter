@@ -74,4 +74,15 @@ const createNames = async (gameId: number, names: String[]) => {
   }
 };
 
-export { createGame, getGame, getGames, getPlayersAndTeams, createPlayersAndTeams, createNames };
+const getRandomName = async (gameId: number) => {
+  try {
+    console.log({gameId})
+    const response = await api.get(`/api/names/random?gameId=${gameId}`)
+    console.log(response);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { createGame, getGame, getGames, getPlayersAndTeams, createPlayersAndTeams, createNames, getRandomName };
