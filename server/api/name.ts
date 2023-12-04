@@ -29,7 +29,7 @@ router.get("/random", async (req: Request, res: Response) => {
       return;
     }
 
-    if (noMoreNamesReturned) {
+    if (noMoreNamesReturned && availableNames.size === 0) {
       res.status(404).json({ error: "No more names available" });
       return;
     }
@@ -44,27 +44,31 @@ router.get("/random", async (req: Request, res: Response) => {
         return;
       }
 
-      names.forEach((name) => availableNames.add(name));
+      // Reset the flag and add new names
+      noMoreNamesReturned = false;
+      names.forEach((name) => {
+        const nameValue = name.get("name");// Assuming 'name' is the property you want to add
+        if (nameValue !== undefined && nameValue !== null) {
+          availableNames.add(nameValue);
+        } else {
+          console.warn("Skipping undefined or null name:", name);
+        }
+      });// Assuming 'name' is the property you want to add
     }
-
-    if (availableNames.size === 0) {
-      noMoreNamesReturned = true;
-      res.status(404).json({ error: "No more names available" });
-      return;
-    }
+    console.log({availableNames})
 
     const namesArray = [...availableNames];
     const randomIndex = Math.floor(Math.random() * namesArray.length);
     const randomName = namesArray[randomIndex];
 
     availableNames.delete(randomName);
+    console.log({availableNames})
 
     if (availableNames.size === 0) {
       noMoreNamesReturned = true;
-      res.status(404).json({ error: "No more names available" });
-    } else {
-      res.status(200).json({ name: randomName });
     }
+
+    res.status(200).json({ name: randomName });
   } catch (error) {
     console.error("Error getting random name:", error);
     res.status(500).json({ error: "Internal Server Error" });
