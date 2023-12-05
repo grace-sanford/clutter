@@ -39,7 +39,7 @@ const GamePage = () => {
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(
-        `http://localhost:3000/games/${uuid}`
+        `${process.env.NEXT_PUBLIC_API_URL}/games/${uuid}`
       );
       setCopySuccess("Copied!");
     } catch (err) {
@@ -115,7 +115,7 @@ const GamePage = () => {
           <input
             type="text"
             readOnly
-            value={`http://localhost:3000/games/${uuid}`}
+            value={`${process.env.NEXT_PUBLIC_API_URL}/games/${uuid}`}
             className="border p-2 w-full"
           />
           <button
