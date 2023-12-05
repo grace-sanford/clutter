@@ -53,18 +53,18 @@ const GamePage = () => {
     setNames(Array.from({ length: numNames }, () => ""));
   }, [numNames]);
 
-  const handleNumNamesChange = (e) => {
+  const handleNumNamesChange = (e: any) => {
     setNumNames(Number(e.target.value));
     console.log(e.target.value);
   };
 
-  const handleNameChange = (index, value) => {
+  const handleNameChange = (index: any, value: any) => {
     const updatedNames = [...names];
     updatedNames[index] = value;
     setNames(updatedNames);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
       if (typeof uuid === "string") {
