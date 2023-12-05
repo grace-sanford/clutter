@@ -6,11 +6,19 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Layout from "../components/Layout";
 // import { v4 } from "uuid";
+import { useEffect } from "react";
+import Modal from "react-modal";
 
 export default function Home() {
+
+  useEffect(() => {
+    // Set the app element to the root element of your application
+    Modal.setAppElement('#your-root-element-id');
+  }, []);
+
   return (
     <Layout>
-      <div className="flex flex-col h-screen">
+      <div className="flex flex-col h-screen" id="your-root-element-id">
         {/* Main Content */}
         <div
           className="flex-grow flex flex-row items-center justify-center bg-blue-600 sm:bg-white md:bg-gray-700 lg:bg-green-600 xl:bg-red-300"
