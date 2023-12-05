@@ -20,10 +20,10 @@ const About = () => {
         <p className="mb-1 font-bold text-2xl">
           Who invented CLUTTER?
         </p>
-        <p className="mb-6">Depending on who you ask, my Mom's friend, Denise, my Mom's friend, Lindsey, my Mom, the family in <a className="underline" href="https://en.wikipedia.org/wiki/Dan_in_Real_Life" target="_blank"><em>Dan In Real Life</em></a>, or this game is  
+        <p className="mb-6">Depending on who you ask, my Mom&apos;s friend, Denise, my Mom&apos;s friend, Lindsey, my Mom, the family in <a className="underline" href="https://en.wikipedia.org/wiki/Dan_in_Real_Life" target="_blank"><em>Dan In Real Life</em></a>, or this game is  
         actually just the first round of that other party game, <a className="underline" href="https://thenerdy.com/how-to-play-salad-bowl/" target="_blank">Salad Bowl</a></p>
         <p className="mb-1 font-bold text-2xl">
-          What's the deal with this website?
+          What&apos;s the deal with this website?
         </p>
         <p className="mb-1">Developed with <a href='https://bun.sh/' target="_blank" 
         className="underline" >Bun</a> and <a href='https://chat.openai.com/' className="underline" target="_blank">ChatGPT</a>, 
