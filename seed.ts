@@ -86,7 +86,7 @@ async function runSeed() {
   try {
     await seed();
     const successMessage = "Seeding success!";
-    figlet(successMessage, function (err, data) {
+    figlet(successMessage, function (err: any, data: any) {
       if (err) {
         console.error(err);
         return;
