@@ -31,6 +31,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-modal": "^3.16.3",
     "@types/sequelize": "^4.28.19",
     "autoprefixer": "^10.4.16",
     "bun-types": "latest",

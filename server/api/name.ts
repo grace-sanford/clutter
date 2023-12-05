@@ -34,7 +34,7 @@ router.get("/random", async (req: Request, res: Response) => {
       return;
     }
 
-    if (availableNames.size === 0) {
+    if (availableNames.size === 0 && typeof gameId === 'number') {
       const names = await Name.findAll({ where: { gameId: gameId } });
       console.log("names", names);
 
