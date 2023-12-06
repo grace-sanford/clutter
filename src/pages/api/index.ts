@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import apiRouter from './api'; // Import the API router
+import apiRouter from '../../../server/api'; // Import the API router
 
 const app: Application = express();
 
@@ -24,16 +24,3 @@ app.use('/api', apiRouter);
 app.use(morgan('dev'));
 
 export default app;
-
-//the order of middleware matters in Express. Have to define the 
-//cors middleware BEFORE the routes.
-// const corsOptions = {
-//   origin: '*',
-//   // origin: "https://clutter-graces-projects-b8fb950d.vercel.app",
-//   // `${"http://localhost:3000"}`, // Only allow requests from this origin
-//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//   optionsSuccessStatus: 204, // No content for preflight OPTIONS request
-// };
-
-// Static middleware
-// app.use(express.static(__dirname + '/../public'));
