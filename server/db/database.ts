@@ -17,7 +17,7 @@ if (!databaseUrl) {
 }
 
 const db = new Sequelize(databaseUrl, {
-  logging: false,
+  logging: true,
 });
 
 
