@@ -35,6 +35,7 @@ const GamePage = () => {
 
   const router = useRouter();
   const { uuid } = router.query;
+  console.log("process.env.NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL)
 
   const copyToClipboard = async () => {
     try {

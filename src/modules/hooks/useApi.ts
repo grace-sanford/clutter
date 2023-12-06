@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000" || process.env.PORT, // Replace with your actual API base URL
+  baseURL: "http://localhost:8000" || process.env.NEXT_PUBLIC_API_URL, // Replace with your actual API base URL
 });
 
 const createGame = async (uuid: string) => {
