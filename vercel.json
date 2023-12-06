@@ -2,7 +2,7 @@
     "routes": [
       {
         "src": "/api/(.*)",
-        "dest": "https://clutter-graces-projects-b8fb950d.vercel.app/api/$1",
+        "dest": "https://clutter-graces-projects-b8fb950d.vercel.app/internal/api/$1",
         "methods": ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"]
       }
     ]
