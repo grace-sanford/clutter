@@ -14,7 +14,7 @@ const app: Application = express();
 // app.use(cors(corsOptions));
 // // app.use(cors());
 
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 
 app.use((req, res, next) => {
     console.log('Incoming Request:', req.method, req.url);
