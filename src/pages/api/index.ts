@@ -5,13 +5,13 @@ import apiRouter from '../../../server/api'; // Import the API router
 
 const app: Application = express();
 
-// const corsOptions = {
-//   origin: "https://clutter-graces-projects-b8fb950d.vercel.app",
-//   // `${"http://localhost:3000"}`, // Only allow requests from this origin
-//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//   optionsSuccessStatus: 204, // No content for preflight OPTIONS request
-// };
-// app.use(cors(corsOptions));
+const corsOptions = {
+  origin: "https://clutter-graces-projects-b8fb950d.vercel.app",
+  // `${"http://localhost:3000"}`, // Only allow requests from this origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  optionsSuccessStatus: 204, // No content for preflight OPTIONS request
+};
+app.use(cors(corsOptions));
 // // app.use(cors());
 
 app.use(morgan('dev'));
