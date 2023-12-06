@@ -5,21 +5,8 @@ import apiRouter from './api'; // Import the API router
 
 const app: Application = express();
 
-//the order of middleware matters in Express. Have to define the 
-//cors middleware BEFORE the routes.
-// const corsOptions = {
-//   origin: '*',
-//   // origin: process.env.NEXT_PUBLIC_API_URL,
-//   // `${"http://localhost:3000"}`, // Only allow requests from this origin
-//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//   optionsSuccessStatus: 204, // No content for preflight OPTIONS request
-// };
-
 // app.use(cors(corsOptions));
 app.use(cors());
-
-// Static middleware
-// app.use(express.static(__dirname + '/../public'));
 
 // Body parsing middleware
 app.use(express.json());
@@ -31,3 +18,16 @@ app.use('/api', apiRouter);
 app.use(morgan('dev'));
 
 export default app;
+
+//the order of middleware matters in Express. Have to define the 
+//cors middleware BEFORE the routes.
+// const corsOptions = {
+//   origin: '*',
+//   // origin: process.env.NEXT_PUBLIC_API_URL,
+//   // `${"http://localhost:3000"}`, // Only allow requests from this origin
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   optionsSuccessStatus: 204, // No content for preflight OPTIONS request
+// };
+
+// Static middleware
+// app.use(express.static(__dirname + '/../public'));
