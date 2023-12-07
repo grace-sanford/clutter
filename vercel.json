@@ -1,7 +1,7 @@
 {
   "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }],
   "functions": {
-    "app/api/**/*": {
+    "app/server/api/*.ts": {
       "maxDuration": 30
     }
   }
