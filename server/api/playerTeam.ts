@@ -16,6 +16,7 @@ const shuffleArray = (array: any[]) => {
 router.post('/', async (req: Request, res: Response) => {
   try {
     const { playerNames, numberOfTeams, gameId } = req.body;
+    console.log({playerNames}, {numberOfTeams})
 
     // Check if playerNames and numberOfTeams are provided
     if (!playerNames || !numberOfTeams) {

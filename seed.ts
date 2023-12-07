@@ -82,22 +82,26 @@ const seed = async () => {
     console.log(1);
 
     // Seed Games
+    console.log('Seeding Games...');
     await Game.bulkCreate(games);
-    console.log(1.1)
+    console.log('Games seeded successfully');
 
     // Seed Teams
+    console.log('Seeding Teams...');
     await Team.bulkCreate(teams);
-    console.log(1.2)
+    console.log('Teams seeded successfully');
 
     // Seed Players
+    console.log('Seeding Players...');
     await Player.bulkCreate(players);
-    console.log(1.3)
+    console.log('Players seeded successfully');
 
     // Seed Names
+    console.log('Seeding Names...');
     await Name.bulkCreate(names);
-    console.log(1.4)
+    console.log('Names seeded successfully');
   } catch (err) {
-    console.error('Error during synchronization:', err);
+    console.error('Error during seeding:', err);
   }
 };
 

@@ -16,25 +16,44 @@ if (!databaseUrl) {
 
 
 //https://stackoverflow.com/questions/61254851/heroku-postgres-sequelize-no-pg-hba-conf-entry-for-host
-// const db = new Sequelize(databaseUrl, {
+console.log("databaseUrl>>>>>>>>>>>>>>", databaseUrl)
+const db = new Sequelize(databaseUrl, {
+  logging: console.log,
+  // dialectOptions: {
+  //   ssl: {
+  //     require: true,
+  //     rejectUnauthorized: false,
+  //     ciphers: [
+  //       "TLS_AES_128_GCM_SHA256",
+  //       "TLS_AES_256_GCM_SHA384",
+  //       "TLS_CHACHA20_POLY1305_SHA256",
+  //       "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+  //       "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256",
+  //       "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+  //     ],
+  //   },
+  // },
+});
+
+db
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
+// const db = new Sequelize('clutter', 'clutter_user', 'WHloSu3Qw23BqgV5gVl11IvyMv0oMvPZ', {
+//   host: 'dpg-clocbvogqk6s73e6qe2g-a.oregon-postgres.render.com',
+//   dialect: 'postgres',
+//   port: 5432,
 //   logging: console.log,
 //   dialectOptions: {
 //     ssl: {
-//       rejectUnauthorized: false,
+//       rejectUnauthorized: false, // Add this line to disable certificate validation (for development only)
 //     },
 //   },
 // });
-
-const db = new Sequelize('clutter', 'clutter_user', 'WHloSu3Qw23BqgV5gVl11IvyMv0oMvPZ', {
-  host: 'dpg-clocbvogqk6s73e6qe2g-a.oregon-postgres.render.com',
-  dialect: 'postgres',
-  port: 5432,
-  logging: console.log,
-  dialectOptions: {
-    ssl: {
-      rejectUnauthorized: false, // Add this line to disable certificate validation (for development only)
-    },
-  },
-});
 
 export default db;
