@@ -35,12 +35,12 @@ const GamePage = () => {
 
   const router = useRouter();
   const { uuid } = router.query;
-  console.log("process.env.NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL)
+  console.log("process.env.PRODUCTION_URL", process.env.PRODUCTION_URL)
 
   const copyToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(
-        `${process.env.NEXT_PUBLIC_API_URL}/games/${uuid}`
+        `${process.env.PRODUCTION_URL}/games/${uuid}`
       );
       setCopySuccess("Copied!");
     } catch (err) {
@@ -116,7 +116,7 @@ const GamePage = () => {
           <input
             type="text"
             readOnly
-            value={`${process.env.NEXT_PUBLIC_API_URL}/games/${uuid}`}
+            value={`${process.env.PRODUCTION_URL}/games/${uuid}`}
             className="border p-2 w-full"
           />
           <button
