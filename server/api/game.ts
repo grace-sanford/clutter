@@ -6,6 +6,8 @@ const router = express.Router();
 
 router.post("/", async (req: Request, res: Response) => {
   try {
+    console.log('Entered the serverless function')
+
     res.status(201).send(await Game.create({ uuid: req.body.uuid }));
   } catch (error) {
     console.error("Error getting games:", error);

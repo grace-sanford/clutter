@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import "../app/globals.css";
 import Link from 'next/link'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -37,6 +38,7 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
             CLUTTER
           </p>
         </div>
+        <SpeedInsights />
         {children}
       </div>
       {/* <div
