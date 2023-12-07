@@ -2,12 +2,12 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 
 interface GameAttributes {
   id: number;
-  uuid: string;
+  uuid: any;
 }
 
 class Game extends Model<GameAttributes> implements GameAttributes {
   public id!: number;
-  public uuid!: string;
+  public uuid!: any;
 }
 
 const initGameModel = (sequelize: Sequelize) => {
