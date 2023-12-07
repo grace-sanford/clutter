@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import { Game } from "../db";
+require('express-async-errors');
 
 const router = express.Router();
 
