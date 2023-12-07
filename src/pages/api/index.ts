@@ -35,17 +35,6 @@ app.use((req, res, next) => {
     });
 });
 
-app.post("/api/games", async (req, res) => {
-    try {
-      console.log('Entered the serverless function')
-  
-      res.status(201).send(await Game.create({ uuid: req.body.uuid }));
-    } catch (error) {
-      console.error("Error getting games:", error);
-      res.status(400).json({ error: "Error creating game" });
-    }
-  });
-
 // Use the API router for paths starting with "/api"
 // app.use('/api', apiRouter);
 
