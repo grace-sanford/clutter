@@ -1,10 +1,10 @@
 // useApi.ts
 import axios from "axios";
 
-console.log('PROD URL:', process.env.PRODUCTION_URL);
+console.log('API URL:', process.env.NEXT_PUBLIC_API_URL);
 const api = axios.create({
   baseURL: 
-  process.env.PRODUCTION_URL || "http://localhost:8000" ,
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000" ,
 });
 
 const createGame = async (uuid: string) => {
