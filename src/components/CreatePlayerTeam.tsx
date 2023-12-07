@@ -77,6 +77,7 @@ const CreatePlayersTeamsForm = () => {
         numberOfTeams: parseInt(numberOfTeams, 10),
         gameId,
       });
+      return playersAndTeamsResponse;
     } catch (error) {
       console.error("Error creating game OR players and teams:", error);
     }
