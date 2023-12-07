@@ -63,21 +63,41 @@ const names = [
 
 const seed = async () => {
   try {
+    console.log(0.1);
+    console.log('Sequelize Version:', Sequelize.version);
+
+    // Test database connection
+    console.log('Testing database connection...');
+    await db.authenticate();
+    console.log('Database connection established successfully.');
+
+    // Synchronize models
+    console.log('Synchronizing database models...');
     await db.sync({ force: true });
+    console.log('Database models synchronized successfully.');
+
+    // Output a success message to indicate progress
+    console.log('Seed function is progressing...');
+
+    console.log(1);
 
     // Seed Games
     await Game.bulkCreate(games);
+    console.log(1.1)
 
     // Seed Teams
     await Team.bulkCreate(teams);
+    console.log(1.2)
 
     // Seed Players
     await Player.bulkCreate(players);
+    console.log(1.3)
 
     // Seed Names
     await Name.bulkCreate(names);
+    console.log(1.4)
   } catch (err) {
-    console.error(err);
+    console.error('Error during synchronization:', err);
   }
 };
 
@@ -86,7 +106,7 @@ async function runSeed() {
   try {
     await seed();
     const successMessage = "Seeding success!";
-    figlet(successMessage, function (err: any, data: any) {
+    figlet(successMessage, function (err, data) {
       if (err) {
         console.error(err);
         return;
