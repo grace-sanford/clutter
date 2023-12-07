@@ -9,7 +9,7 @@ interface TeamAttributes {
 class Team extends Model<TeamAttributes> implements TeamAttributes {
   public id!: number;
   public name!: string;
-  public gameId: number;
+  public gameId!: number;
 }
 
 const initTeamModel = (sequelize: Sequelize) => {
