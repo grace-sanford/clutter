@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import apiRouter from '../../../server/api'; // Import the API router
+import apiRouter from '../server/api'; // Import the API router
 
 const app: Application = express();
 
