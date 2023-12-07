@@ -5,8 +5,10 @@ const router = express.Router();
 
 router.post("/", async (req: Request, res: Response) => {
   try {
+
     res.status(201).send(await Game.create({ id: 0, uuid: req.body.uuid }));
-  } catch {
+  } catch (error) {
+    console.error("Error getting games:", error);
     res.status(400).json({ error: "Error creating game" });
   }
 });
