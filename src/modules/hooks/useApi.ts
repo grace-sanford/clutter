@@ -4,8 +4,7 @@ import axios from "axios";
 console.log('PROD URL:', process.env.PRODUCTION_URL);
 const api = axios.create({
   baseURL: 
-  // "http://localhost:8000" 
-  process.env.PRODUCTION_URL, // Replace with your actual API base URL
+  process.env.PRODUCTION_URL || "http://localhost:8000" ,
 });
 
 const createGame = async (uuid: string) => {
