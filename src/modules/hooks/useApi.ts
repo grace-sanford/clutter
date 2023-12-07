@@ -7,39 +7,39 @@ const api = axios.create({
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000" ,
 });
 
-const createGame = async (uuid: string) => {
-  try {
-    const gameResponse = await fetch("/api/games", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        uuid,
-      }),
-    });
-
-    if (!gameResponse.ok) {
-      // Handle non-successful responses, e.g., throw an error
-      throw new Error(`Failed to create game: ${gameResponse.statusText}`);
-    }
-
-    const responseData = await gameResponse.json();
-    return responseData;
-  } catch (error) {
-    // Handle errors
-    throw error;
-  }
-};
-
 // const createGame = async (uuid: string) => {
 //   try {
-//     const response = await api.post("/api/games", { uuid });
-//     return response.data;
+//     const gameResponse = await fetch("/api/games", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         uuid,
+//       }),
+//     });
+
+//     if (!gameResponse.ok) {
+//       // Handle non-successful responses, e.g., throw an error
+//       throw new Error(`Failed to create game: ${gameResponse.statusText}`);
+//     }
+
+//     const responseData = await gameResponse.json();
+//     return responseData;
 //   } catch (error) {
+//     // Handle errors
 //     throw error;
 //   }
 // };
+
+const createGame = async (uuid: string) => {
+  try {
+    const response = await api.post("/api/games", { uuid });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
 
 const getGame = async (uuid: string) => {
   try {
