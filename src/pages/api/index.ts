@@ -18,22 +18,22 @@ app.options('/api/games', cors());
 
 app.use(morgan('dev'));
 
-// app.use((req, res, next) => {
-//     console.log('Incoming Request:', req.method, req.url);
-//     console.log('Request Headers:', req.headers);
+app.use((req, res, next) => {
+    console.log('Incoming Request:', req.method, req.url);
+    console.log('Request Headers:', req.headers);
   
-//     let requestBody = '';
+    let requestBody = '';
   
-//     req.on('data', (chunk) => {
-//       requestBody += chunk.toString();
-//     });
+    req.on('data', (chunk) => {
+      requestBody += chunk.toString();
+    });
   
-//     req.on('end', () => {
-//       console.log('Request Body:', requestBody);
-//       next();
-//     });
-//     next();
-//   });
+    req.on('end', () => {
+      console.log('Request Body:', requestBody);
+      next();
+    });
+    next();
+  });
 
 // Body parsing middleware
 app.use(express.json());
