@@ -14,26 +14,8 @@ const app: Application = express();
 // };
 // app.use(cors(corsOptions));
 app.use(cors());
-app.options('/api/games', cors());
 
 app.use(morgan('dev'));
-
-app.use((req, res, next) => {
-    console.log('Incoming Request:', req.method, req.url);
-    console.log('Request Headers:', req.headers);
-  
-    let requestBody = '';
-  
-    req.on('data', (chunk) => {
-      requestBody += chunk.toString();
-    });
-  
-    req.on('end', () => {
-      console.log('Request Body:', requestBody);
-      next();
-    });
-    next();
-  });
 
 // Body parsing middleware
 app.use(express.json());
