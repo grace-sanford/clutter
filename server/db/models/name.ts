@@ -9,7 +9,7 @@ interface NameAttributes {
 class NameModel extends Model<NameAttributes> implements NameAttributes {
   public id!: number;
   public name!: string;
-  gameId!: number;
+  public gameId!: number;
 }
 
 const initNameModel = (sequelize: Sequelize) => {
