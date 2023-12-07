@@ -3,6 +3,7 @@
 // You shouldn't need to make any modifications here.
 import { Sequelize } from 'sequelize';
 import pkg from '../../package.json';
+require('pg')
 
 const databaseUrl = process.env.DATABASE_URL;
 
