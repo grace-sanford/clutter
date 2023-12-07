@@ -19,7 +19,16 @@ if (!databaseUrl) {
 //https://stackoverflow.com/questions/61254851/heroku-postgres-sequelize-no-pg-hba-conf-entry-for-host
 console.log("databaseUrl>>>>>>>>>>>>>>", databaseUrl)
 const db = new Sequelize(databaseUrl, {
-  logging: console.log,
+  logging: (query, timing) => {
+    console.log(query);
+    console.log(timing);
+  },
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000,
+  },
   dialectOptions: {
     ssl: {
       require: true,
