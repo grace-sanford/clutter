@@ -3,11 +3,13 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 interface NameAttributes {
   id: number;
   name: string;
+  gameId: number;
 }
 
 class NameModel extends Model<NameAttributes> implements NameAttributes {
   public id!: number;
   public name!: string;
+  gameId!: number;
 }
 
 const initNameModel = (sequelize: Sequelize) => {

@@ -33,7 +33,7 @@ router.post('/', async (req: Request, res: Response) => {
     // Create teams
     const teams: any[] = [];
     for (let i = 0; i < numberOfTeams; i++) {
-      const team = await Team.create({ name: `Team ${i + 1}`, gameId: gameId});
+      const team = await Team.create({ id: 0, name: `Team ${i + 1}`, gameId: gameId});
       teams.push(team);
     }
 
@@ -46,7 +46,7 @@ router.post('/', async (req: Request, res: Response) => {
       const teamId = team.get('id')
       console.log(teams, "teams")
 
-      const player = await Player.create({ username: playerName, teamId: teamId });
+      const player = await Player.create({ id: 0, username: playerName, teamId: teamId });
       players.push(player);
     }
 
