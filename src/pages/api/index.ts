@@ -18,7 +18,7 @@ app.use(cors());
 app.use(morgan('dev'));
 
 // Body parsing middleware
-app.use(express.json());
+// app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Log incoming request bodies
