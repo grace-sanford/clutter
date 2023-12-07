@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Game } from '../../../../server/db';
 
 type GetGamesResponse = {
-  response?: object;
+  response?: Game | null;
   error?: any;
 }
 
@@ -18,7 +18,7 @@ try {
     }
 
     const response = await Game.findOne({ where: { uuid: uuid } });
-    res.send(response);
+    res.status(201).json({ response, error: null } as GetGamesResponse);
   } catch (error) {
     console.error("Error getting games:", error);
     res.status(400).json({ error: "Error getting games" });
