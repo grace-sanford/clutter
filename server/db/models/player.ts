@@ -1,13 +1,13 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
 interface PlayerAttributes {
-  id: number;
+  id?: number;
   username: string;
   teamId: number;
 }
 
 class PlayerModel extends Model<PlayerAttributes> implements PlayerAttributes {
-  public id!: number;
+  public id?: number;
   public username!: string;
   public teamId!: number;
 }

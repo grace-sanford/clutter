@@ -1,12 +1,12 @@
 import { DataTypes, Model, Sequelize } from 'sequelize';
 
 interface GameAttributes {
-  id: number;
+  id?: number;
   uuid: any;
 }
 
 class Game extends Model<GameAttributes> implements GameAttributes {
-  public id!: number;
+  public id?: number;
   public uuid!: any;
 }
 
