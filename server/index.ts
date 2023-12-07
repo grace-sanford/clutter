@@ -1,5 +1,5 @@
 const port = process.env.PORT;
-import app from "../api"
+import app from "../src/pages/api"
 // const db = require("./db/database").default;
 
 // const init = async () => {
