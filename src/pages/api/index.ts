@@ -21,6 +21,20 @@ app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Log incoming request bodies
+app.use((req, res, next) => {
+    let requestBody = '';
+  
+    req.on('data', (chunk) => {
+      requestBody += chunk.toString();
+    });
+  
+    req.on('end', () => {
+      console.log('Request Body:', requestBody);
+      next();
+    });
+});
+
 // Use the API router for paths starting with "/api"
 app.use('/api', apiRouter);
 
