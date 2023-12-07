@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Game, Team } from '../../../server/db';
+import { Player, Team } from '../../../server/db';
 
 type PlayersTeamsResponse = {
   message?: string;
