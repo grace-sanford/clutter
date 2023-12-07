@@ -27,7 +27,8 @@
     "react-modal": "^3.16.1",
     "react-redux": "^9.0.1",
     "sequelize": "^6.35.1",
-    "tsc": "^2.0.4"
+    "tsc": "^2.0.4",
+    "vercel": "^32.6.1"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.23.5",

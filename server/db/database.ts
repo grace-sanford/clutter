@@ -19,20 +19,20 @@ if (!databaseUrl) {
 console.log("databaseUrl>>>>>>>>>>>>>>", databaseUrl)
 const db = new Sequelize(databaseUrl, {
   logging: console.log,
-  // dialectOptions: {
-  //   ssl: {
-  //     require: true,
-  //     rejectUnauthorized: false,
-  //     ciphers: [
-  //       "TLS_AES_128_GCM_SHA256",
-  //       "TLS_AES_256_GCM_SHA384",
-  //       "TLS_CHACHA20_POLY1305_SHA256",
-  //       "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
-  //       "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256",
-  //       "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
-  //     ],
-  //   },
-  // },
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+      ciphers: [
+        "TLS_AES_128_GCM_SHA256",
+        "TLS_AES_256_GCM_SHA384",
+        "TLS_CHACHA20_POLY1305_SHA256",
+        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+        "TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256",
+        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384",
+      ],
+    },
+  },
 });
 
 db
