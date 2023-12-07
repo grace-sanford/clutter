@@ -2,10 +2,12 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 
 interface GameAttributes {
   id: number;
+  uuid: string;
 }
 
 class Game extends Model<GameAttributes> implements GameAttributes {
   public id!: number;
+  public uuid!: string;
 }
 
 const initGameModel = (sequelize: Sequelize) => {
@@ -17,7 +19,7 @@ const initGameModel = (sequelize: Sequelize) => {
         autoIncrement: true
       },
       uuid: {
-        type: DataTypes.STRING(50)
+        type: DataTypes.STRING(50),
       },
     },
     {
