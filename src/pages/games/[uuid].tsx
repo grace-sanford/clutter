@@ -74,8 +74,8 @@ const GamePage = () => {
           return;
         }
         const game = await getGame(uuid);
-        console.log({game})
-        const gameId = game.id;
+        console.log("game.response", game.response)
+        const gameId = game.response.id;
         console.log({ gameId });
         if (gameId) {
           console.log({ names });
