@@ -18,7 +18,7 @@ try {
     }
 
     const response = await Game.findOne({ where: { uuid: uuid } });
-    res.status(201).json({ response, error: null } as GetGamesResponse);
+    res.status(201).json({ response });
   } catch (error) {
     console.error("Error getting games:", error);
     res.status(400).json({ error: "Error getting games" });
