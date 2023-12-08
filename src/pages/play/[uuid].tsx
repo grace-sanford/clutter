@@ -58,7 +58,7 @@ const PlayPage = () => {
     setTeams(data.teams);
     setPlayers(data.teams.flatMap((team: any) => team.Players));
   };
-  console.log("scores", scores);
+  console.log("scores", teams.map((t) => scores[t.id]));
 
   // Function to increment the score for the selected team
   const incrementScore = () => {
@@ -169,7 +169,7 @@ const PlayPage = () => {
           <span className="font-bold" style={{ color: teamColors[index] }}>
             {t.name} - {" "}
           </span>
-          <span>{scores[t.id]}</span>
+          <span className="font-bold text-black-500">{scores[t.id]}</span>
         </div>
       ))}
     </div>
