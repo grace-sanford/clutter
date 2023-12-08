@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Layout from "./Layout";
 
 const Timer = ({ numSecs }: { numSecs: number }) => {
   // initialize timeLeft with the seconds prop
@@ -21,9 +22,7 @@ const Timer = ({ numSecs }: { numSecs: number }) => {
   }, [timeLeft]);
 
   return (
-    <div>
-      <h1>{timeLeft}</h1>
-    </div>
+      <h1 className="text-xl text-right">{timeLeft}</h1>
   );
 };
 

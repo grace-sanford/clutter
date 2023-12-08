@@ -146,300 +146,97 @@ const PlayPage = () => {
 
   return (
     <Layout pageTitle={"Clutter | Play"}>
-      <div>
-        Get with your teams!
-        {teams.map((t, index) => (
-          <div
-            key={t.id}
-            style={{ color: teamColors[index] }}
-            className="font-bold"
-          >
-            {t.name}
-            <div>
-              {t.Players.map((p) => (
-                <li key={p.id}>{p.username}</li>
-              ))}
-            </div>
+      <div className="flex flex-col lg:flex-row p-10 min-h-screen px-3 bg-blue-600 sm:bg-white md:bg-gray-700 lg:bg-green-600 xl:bg-red-300">
+  {/* Left Sidebar */}
+  <div className="p-4 self-center justify-center bg-white sm:w-full lg:w-1/2 rounded">
+    <div className="font-bold text-lg mb-4">Teams</div>
+    <div className="flex flex-col lg:flex-row flex-wrap">
+      {teams.map((t, index) => (
+        <div key={t.id} className="font-bold mb-2 lg:mr-4 p-4" style={{ color: teamColors[index] }}>
+          <span className="underline">{t.name}</span>
+          <div>
+            {t.Players.map((p) => (
+              <div key={p.id}>{p.username}</div>
+            ))}
           </div>
-        ))}
+        </div>
+      ))}
+    </div>
+    <div className="font-bold text-lg mb-4">Leaderboard</div>
+    <div className="mt-4 p-4 flex flex-col lg:flex-row flex-wrap">
+      {teams.map((t, index) => (
+        <div key={t.id} className="mb-2 p-4">
+          <span className="font-bold" style={{ color: teamColors[index] }}>
+            {t.name} - {" "}
+          </span>
+          <span>{scores[t.id]}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+  
+        {/* Right Content */}
+        <div className="p-4 self-center justify-center lg:w-1/2 lg:flex-grow max-w-400">
+          <div className="mb-4 p-4">
+            <span className="text-white">
+            How many seconds will you allow for guessing?</span>
+            <label className="mb-2 block">
+              <select 
+                value={numSecs}
+                onChange={handleNumSecsChange}
+                className="p-1 border rounded w-full"
+              >
+                {[35, 40, 45, 50, 55, 60].map((num) => (
+                  <option key={num} value={num}>
+                    {num}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <div className="mb-4 p-4">
+          <span className="text-white">
+            Who&apos;s turn?{" "}</span>
+            <label className="mb-2 block">
+              <select
+                value={selectedTeam}
+                onChange={(e) => setSelectedTeam(e.target.value)}
+                className="p-1 border rounded w-full"
+              >
+                {teams.map((team) => (
+                  <option key={team.id} value={team.id}>
+                    {team.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <div className="flex justify-center items-center">
+            <button
+              type="button"
+              onClick={openModal}
+              className="bg-green-500 text-white py-2 px-4 rounded cursor-pointer"
+            >
+              Play
+            </button>
+          </div>
+        </div>
       </div>
-      <div>
-        How many seconds will you allow for guessing?
-        <label className="mb-2">
-          <select
-            value={numSecs}
-            onChange={handleNumSecsChange}
-            className="ml-2 p-1 border rounded"
-          >
-            {[35, 40, 45, 50, 55, 60].map((num) => (
-              <option key={num} value={num}>
-                {num}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-      <div>
-        What team is guessing?{" "}
-        <label className="mb-2">
-          <select
-            value={selectedTeam}
-            onChange={(e) => setSelectedTeam(e.target.value)}
-            className="ml-2 p-1 border rounded"
-          >
-            {teams.map((team) => (
-              <option key={team.id} value={team.id}>
-                {team.name}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-      <button type="button" onClick={openModal}>
-        Play
-      </button>
+  
       <Modal
         isOpen={isModalOpen}
         onRequestClose={() => setIsModalOpen(false)}
         contentLabel="Name Modal"
+        className="centered-modal-content overflow-y-auto modal-overlay"
       >
-        <div>{currentName?.name || "No more names! The bowl is empty!"}</div>
-        <button type="button" onClick={markNameGuessed}>
-          Next {">"}
-        </button>
         <Timer numSecs={numSecs} />
+        <div className="font-bold text-4xl">{currentName?.name || <span className="text-red-500">All done! <div>The bowl is empty 🎉</div></span>}</div>
+        <button type="button" onClick={markNameGuessed} className="bg-green-500 text-white py-2 px-4 rounded cursor-pointer mt-4">
+          Next
+        </button>
       </Modal>
-      <div>Leaderboard</div>
-      {teams.map((t, index) => (
-        <div key={t.id}>
-        <span style={{ color: teamColors[index] }}>
-          {t.name} - {" "}</span><span>{scores[t.id]}</span>
-          </div>
-      ))}
     </Layout>
   );
 };
-
-// type ColorTuple = [string, number];
-
-// interface CountdownCircleTimerProps {
-//   colors: { [key: number]: `#${string}` };
-//   isPlaying: boolean;
-//   duration: number;
-//   onComplete: () => void;
-// }
-
-// const transformColors = (
-//   colors: ColorTuple[]
-// ): CountdownCircleTimerProps["colors"] => {
-//   return colors.reduce((acc, [color, duration], index) => {
-//     acc[index] = `#${color}`;
-//     return acc;
-//   }, {} as CountdownCircleTimerProps["colors"]);
-// };
-// const PlayPage = () => {
-//   const [loading, setLoading] = useState<boolean>(false);
-//   const [error, setError] = useState<Error | null>(null);
-//   const [teams, setTeams] = useState<Team[]>([]);
-//   const [numSecs, setNumSecs] = useState(35);
-
-//   const [players, setPlayers] = useState<Player[]>([]);
-//   const [currentIndex, setCurrentIndex] = useState(0);
-//   const [isModalOpen, setIsModalOpen] = useState(false);
-//   const [currentName, setCurrentName] = useState("");
-//   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
-
-//   const router = useRouter();
-//   const { uuid } = router.query;
-
-//   // Example colors
-//   const colors: ColorTuple[] = [
-//     ["#004777", 0.33],
-//     ["#F7B801", 0.33],
-//     ["#A30000", 0.33],
-//   ];
-
-//   // Transform the colors into the expected structure
-//   const formattedColors = transformColors(colors);
-
-//   const fetchRandomName = async () => {
-//     try {
-//       if (typeof uuid === "string") {
-//         const game = await getGame(uuid);
-//         const gameId = game.response.id;
-//         const response = await getRandomName(gameId);
-//         console.log({ response });
-//         setCurrentName(response.data.name);
-//         return response.data.name;
-//       }
-//     } catch (error) {
-//       console.error("Error fetching random name:", error);
-//       setCurrentName(`No more names!`);
-//       setError(error as Error);
-//       return null;
-//     }
-//   };
-//   console.log({ currentName });
-
-//   const handleNextPlayer = async () => {
-//     try {
-//       let randomName = await fetchRandomName();
-
-//       if (randomName) {
-//         setCurrentName(randomName);
-//         setIsModalOpen(true);
-
-//         // Set a timeout to close the modal after the specified seconds
-//         const timeoutId = setTimeout(() => {
-//           setIsModalOpen(false);
-
-//           // Set a timeout to handle the next player after a delay
-//           const nextPlayerTimeoutId = setTimeout(() => {
-//             handleNextPlayerAfterDelay();
-//           }, 1000); // Delay for a smooth transition (adjust as needed)
-
-//           // Save the timeout id for cleanup
-//           setTimer(nextPlayerTimeoutId);
-//         }, numSecs * 1000);
-
-//         // Save the timeout id for cleanup
-//         setTimer(timeoutId);
-//       }
-//     } catch (error) {
-//       throw error;
-//     }
-//   };
-
-//   const handleNextPlayerAfterDelay = () => {
-//     if (currentIndex < players.length - 1) {
-//       setCurrentIndex(currentIndex + 1);
-//     } else {
-//       setCurrentIndex(0);
-//     }
-//   };
-
-//   useEffect(() => {
-//     const handleCreateGame = async () => {
-//       setLoading(true);
-
-//       try {
-//         if (typeof uuid === "string") {
-//           const game = await getGame(uuid);
-//           const gameId = game.id;
-//           if (gameId) {
-//             const data = await getPlayersAndTeams(gameId);
-//             console.log({ data });
-//             setTeams(data);
-//             setPlayers(data.flatMap((team: any) => team.Players));
-//           }
-//         } else {
-//           //pass
-//         }
-//       } catch (err) {
-//         setError(err as Error);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-//     handleCreateGame();
-
-//     // Cleanup timer on component unmount
-//     return () => {
-//       if (timer) {
-//         clearTimeout(timer);
-//       }
-//     };
-//   }, [uuid, timer]);
-
-//   console.log("teams", teams);
-//   console.log("players", players);
-
-//   const handleNumSecsChange = (e: any) => {
-//     setNumSecs(Number(e.target.value));
-//     console.log(e.target.value);
-//   };
-
-//   const getTeamName = (teamId: number) => {
-//     const team = teams.find((t) => t.id === teamId);
-//     return team?.name || "";
-//   };
-
-//   const teamColors = ["red", "blue", "green", "purple", "orange", "pink"];
-
-//   const getTeamColor = (teamId: number) => {
-//     const team = teams.find((t) => t.id === teamId);
-//     return team ? teamColors[teams.indexOf(team)] : "black"; // Default to black if color is not found
-//   };
-
-//   return (
-//     <Layout pageTitle={"Clutter | Play"}>
-//       <div>
-//         Get with your teams!
-//         {teams.map((t, index) => (
-//           <div
-//             key={t.id}
-//             style={{ color: teamColors[index] }}
-//             className="font-bold"
-//           >
-//             {t.name}
-//             <div>
-//               {t.Players.map((p) => (
-//                 <li key={p.id}>{p.username}</li>
-//               ))}
-//             </div>
-//           </div>
-//         ))}
-//         <div>
-//           How many seconds will you allow for guessing?
-//           <label className="mb-2">
-//             <select
-//               value={numSecs}
-//               onChange={handleNumSecsChange}
-//               className="ml-2 p-1 border rounded"
-//             >
-//               {[35, 40, 45, 50, 55, 60].map((num) => (
-//                 <option key={num} value={num}>
-//                   {num}
-//                 </option>
-//               ))}
-//             </select>
-//           </label>
-//         </div>
-//         <div>
-//           <button onClick={handleNextPlayer}>Start</button>
-//           {error ? (
-//             <div className="text-red-500">
-//               Error fetching name: {error.message}. No more names!
-//             </div>
-//           ) : (
-//             ""
-//           )}
-//         </div>
-//         {/* Modal for displaying names */}
-//         <Modal
-//           isOpen={isModalOpen}
-//           onRequestClose={() => setIsModalOpen(false)}
-//           contentLabel="Name Modal"
-//         >
-//           <h1>{currentName ? currentName : ""}</h1>
-//           <div>
-//             <CountdownCircleTimer
-//               colors={["#004777", "#F7B801", "#A30000"]}
-//               colorsTime={[0.33, 0.33, 0.33]}
-//               isPlaying
-//               duration={numSecs}
-//               onComplete={() => setIsModalOpen(false)}
-//             >
-//               {({ remainingTime }) => remainingTime}
-//             </CountdownCircleTimer>
-//           </div>
-//           <div>
-//             <button onClick={() => fetchRandomName()}>Draw Another Name</button>
-//           </div>
-//         </Modal>
-//       </div>
-//     </Layout>
-//   );
-// };
 
 export default PlayPage;
