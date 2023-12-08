@@ -12,6 +12,21 @@ import {
 import Modal from "react-modal";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
+interface Team {
+  id: number;
+  name: string;
+  gameId: number;
+  createdAt: string;
+  Players: Player[];
+}
+
+interface Player {
+  id: number;
+  username: string;
+  teamId: number;
+  createdAt: string;
+}
+
 const PlayPage = () => {
   const [gameId, setGameId] = useState();
   const [unGuessedNames, setUnguessedNames] = useState([]);
@@ -21,9 +36,20 @@ const PlayPage = () => {
     isGuessed: boolean;
     gameId: number;
   } | null>(null);
+  const [players, setPlayers] = useState<Player[]>([]);
+  const [teams, setTeams] = useState<Team[]>([]);
 
   const router = useRouter();
   const { uuid } = router.query;
+
+  const onMountPlayersAndTeams = async (gameId: number) => {
+    const data = await getPlayersAndTeams(gameId);
+    console.log("data", data);
+    setTeams(data.teams);
+    setPlayers(data.teams.flatMap((team: any) => team.Players));
+  };
+  console.log("players", players)
+  console.log("teams", teams)
 
   const markNameGuessed = async () => {
     try {
@@ -48,6 +74,7 @@ const PlayPage = () => {
           const gameId = game.response.id;
           setGameId(gameId);
           if (gameId) {
+            onMountPlayersAndTeams(gameId);
             const response = await fetch(
               `/api/names/unguessed?gameId=${gameId}`
             );
@@ -70,7 +97,6 @@ const PlayPage = () => {
         console.error("Error fetching unguessed names:", err);
       }
     };
-
     handleGetNames();
   }, [uuid]);
 
@@ -78,15 +104,43 @@ const PlayPage = () => {
   console.log("unGuessedNames", unGuessedNames);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [numSecs, setNumSecs] = useState(35);
+  const [numSecs, setNumSecs] = useState(3);
 
   const handleNumSecsChange = (e: any) => {
     setNumSecs(Number(e.target.value));
     console.log(e.target.value);
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+
+    // Set isModalOpen to false after a certain number of seconds 
+    setTimeout(() => {
+      setIsModalOpen(false);
+    }, numSecs * 1000);
+  };
+
+  const teamColors = ["red", "blue", "green", "purple", "orange", "pink"];
+
   return (
     <Layout pageTitle={"Clutter | Play"}>
+      <div>
+        Get with your teams!
+        {teams.map((t, index) => (
+          <div
+            key={t.id}
+            style={{ color: teamColors[index] }}
+            className="font-bold"
+          >
+            {t.name}
+            <div>
+              {t.Players.map((p) => (
+                <li key={p.id}>{p.username}</li>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
       <div>
         How many seconds will you allow for guessing?
         <label className="mb-2">
@@ -95,7 +149,7 @@ const PlayPage = () => {
             onChange={handleNumSecsChange}
             className="ml-2 p-1 border rounded"
           >
-            {[35, 40, 45, 50, 55, 60].map((num) => (
+            {[3, 40, 45, 50, 55, 60].map((num) => (
               <option key={num} value={num}>
                 {num}
               </option>
@@ -103,36 +157,22 @@ const PlayPage = () => {
           </select>
         </label>
       </div>
-      <button type='button' onClick={()=> setIsModalOpen(true)}>Play</button>
+      <button type="button" onClick={openModal}>
+        Play
+      </button>
       <Modal
         isOpen={isModalOpen}
-        closeTimeoutMS={numSecs + 1000}
         onRequestClose={() => setIsModalOpen(false)}
         contentLabel="Name Modal"
       >
         <div>{currentName?.name || "No more names! The bowl is empty!"}</div>
         <button type="button" onClick={markNameGuessed}>
-          Next {'>'}
+          Next {">"}
         </button>
       </Modal>
     </Layout>
   );
 };
-
-// interface Team {
-//   id: number;
-//   name: string;
-//   gameId: number;
-//   createdAt: string;
-//   Players: Player[];
-// }
-
-// interface Player {
-//   id: number;
-//   username: string;
-//   teamId: number;
-//   createdAt: string;
-// }
 
 // type ColorTuple = [string, number];
 
