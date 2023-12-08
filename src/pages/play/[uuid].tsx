@@ -42,12 +42,12 @@ const PlayPage = () => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
   const [scores, setScores] = useState<Scores>({
-    "1": 0,
-    "2": 0,
-    "3": 0,
-    "4": 0,
-    "5": 0,
-    "6": 0,
+    "Team 1": 0,
+    "Team 2": 0,
+    "Team 3": 0,
+    "Team 4": 0,
+    "Team 5": 0,
+    "Team 6": 0,
   });
 
   const router = useRouter();
@@ -58,7 +58,7 @@ const PlayPage = () => {
     setTeams(data.teams);
     setPlayers(data.teams.flatMap((team: any) => team.Players));
   };
-  console.log("scores", teams.map((t) => scores[t.id]));
+  console.log("scores", teams.map((t) => scores[t.name]));
 
   // Function to increment the score for the selected team
   const incrementScore = () => {
@@ -141,8 +141,10 @@ const PlayPage = () => {
       setIsModalOpen(false);
     }, numSecs * 1000);
   };
-  const [selectedTeam, setSelectedTeam] = useState("1");
+  const [selectedTeam, setSelectedTeam] = useState("Team 1");
   const teamColors = ["red", "blue", "green", "purple", "orange", "pink"];
+
+  console.log("selectedTeam",selectedTeam)
 
   return (
     <Layout pageTitle={"Clutter | Play"}>
@@ -169,7 +171,7 @@ const PlayPage = () => {
           <span className="font-bold" style={{ color: teamColors[index] }}>
             {t.name} - {" "}
           </span>
-          <span className="font-bold text-black-500">{scores[t.id]}</span>
+          <span className="font-bold text-black-500">{scores[t.name]}</span>
         </div>
       ))}
     </div>
@@ -204,7 +206,7 @@ const PlayPage = () => {
                 className="p-1 border rounded w-full"
               >
                 {teams.map((team) => (
-                  <option key={team.id} value={team.id}>
+                  <option key={team.id} value={team.name}>
                     {team.name}
                   </option>
                 ))}
