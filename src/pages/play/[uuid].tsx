@@ -71,7 +71,7 @@ const PlayPage = () => {
     try {
       if (typeof uuid === "string") {
         const game = await getGame(uuid);
-        const gameId = game.id;
+        const gameId = game.response.id;
         const response = await getRandomName(gameId);
         console.log({ response });
         setCurrentName(response.data.name);
