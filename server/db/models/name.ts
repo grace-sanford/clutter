@@ -3,12 +3,14 @@ import { DataTypes, Model, Sequelize } from 'sequelize';
 interface NameAttributes {
   id: number;
   name: string;
+  isGuessed: boolean;
   gameId: number;
 }
 
 class NameModel extends Model<NameAttributes> implements NameAttributes {
   public id!: number;
   public name!: string;
+  public isGuessed!: boolean;
   public gameId!: number;
 }
 
@@ -22,6 +24,10 @@ const initNameModel = (sequelize: Sequelize) => {
       },
       name: {
         type: DataTypes.STRING(50),
+      },
+      isGuessed: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
       gameId: {
         type: DataTypes.INTEGER,
