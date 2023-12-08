@@ -26,6 +26,9 @@ interface Player {
   teamId: number;
   createdAt: string;
 }
+type Scores = {
+  [team: string]: number;
+};
 
 const PlayPage = () => {
   const [gameId, setGameId] = useState();
@@ -38,27 +41,50 @@ const PlayPage = () => {
   } | null>(null);
   const [players, setPlayers] = useState<Player[]>([]);
   const [teams, setTeams] = useState<Team[]>([]);
+  const [scores, setScores] = useState<Scores>({
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0,
+  });
 
   const router = useRouter();
   const { uuid } = router.query;
 
   const onMountPlayersAndTeams = async (gameId: number) => {
     const data = await getPlayersAndTeams(gameId);
-    console.log("data", data);
     setTeams(data.teams);
     setPlayers(data.teams.flatMap((team: any) => team.Players));
   };
-  console.log("players", players)
-  console.log("teams", teams)
+  console.log("scores", scores);
+
+  // Function to increment the score for the selected team
+  const incrementScore = () => {
+    // Assuming selectedTeam is the name of the selected team
+    console.log("selectedTeam", selectedTeam);
+    if (selectedTeam) {
+      setScores((prevScores) => {
+        console.log("prevScores", prevScores);
+        const updatedScores = {
+          ...prevScores,
+          [selectedTeam]: (prevScores[selectedTeam] || 0) + 1,
+        };
+        console.log("updatedScores", updatedScores);
+        return updatedScores;
+      });
+    }
+  };
 
   const markNameGuessed = async () => {
     try {
       if (currentName && gameId) {
         let nameId = currentName.id;
         const response = await fetch(`/api/names/${nameId}?gameId=${gameId}`);
-        console.log("response", response);
         unGuessedNames.shift();
         setCurrentName(unGuessedNames[0]);
+        incrementScore();
         return response;
       }
     } catch (err) {
@@ -100,26 +126,22 @@ const PlayPage = () => {
     handleGetNames();
   }, [uuid]);
 
-  console.log("currentName", currentName);
-  console.log("unGuessedNames", unGuessedNames);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [numSecs, setNumSecs] = useState(3);
+  const [numSecs, setNumSecs] = useState(35);
 
   const handleNumSecsChange = (e: any) => {
     setNumSecs(Number(e.target.value));
-    console.log(e.target.value);
   };
 
   const openModal = () => {
     setIsModalOpen(true);
 
-    // Set isModalOpen to false after a certain number of seconds 
+    // Set isModalOpen to false after a certain number of seconds
     setTimeout(() => {
       setIsModalOpen(false);
     }, numSecs * 1000);
   };
-
+  const [selectedTeam, setSelectedTeam] = useState("1");
   const teamColors = ["red", "blue", "green", "purple", "orange", "pink"];
 
   return (
@@ -149,9 +171,25 @@ const PlayPage = () => {
             onChange={handleNumSecsChange}
             className="ml-2 p-1 border rounded"
           >
-            {[3, 40, 45, 50, 55, 60].map((num) => (
+            {[35, 40, 45, 50, 55, 60].map((num) => (
               <option key={num} value={num}>
                 {num}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+      <div>
+        What team is guessing?{" "}
+        <label className="mb-2">
+          <select
+            value={selectedTeam}
+            onChange={(e) => setSelectedTeam(e.target.value)}
+            className="ml-2 p-1 border rounded"
+          >
+            {teams.map((team) => (
+              <option key={team.id} value={team.id}>
+                {team.name}
               </option>
             ))}
           </select>
@@ -169,8 +207,15 @@ const PlayPage = () => {
         <button type="button" onClick={markNameGuessed}>
           Next {">"}
         </button>
-        <Timer numSecs={numSecs}/>
+        <Timer numSecs={numSecs} />
       </Modal>
+      <div>Leaderboard</div>
+      {teams.map((t, index) => (
+        <div key={t.id}>
+        <span style={{ color: teamColors[index] }}>
+          {t.name} - {" "}</span><span>{scores[t.id]}</span>
+          </div>
+      ))}
     </Layout>
   );
 };
