@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Game, Team } from '../../../server/db';
+import { Name } from '../../../server/db';
 
 type NameResponse = {
-  createdNames?: Array<string>
+  createdNames?: Name[];
   error?: string
 }
 
@@ -12,10 +12,14 @@ export default async function handler(
   res: NextApiResponse<NameResponse>
 ) {
 try {
+  console.log("entering names POST")
     const { names, gameId } = req.body;
+    console.log({names}, {gameId})
     const namesToCreate = names.map((n: any) => ({ name: n, gameId: gameId }));
+    console.log({namesToCreate})
     const createdNames = await Name.bulkCreate(namesToCreate);
-    res.status(201).json(createdNames);
+    console.log({createdNames})
+    res.status(201).json({ createdNames });
   } catch {
     res.status(400).json({ error: "Error creating name" });
   }

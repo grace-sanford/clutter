@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { Team } from '../../../../server/db';
+import { Team, Player } from '../../../../server/db';
 
 type GetPlayersTeamsResponse = {
   teams?: Team[];

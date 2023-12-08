@@ -28,15 +28,16 @@ const db = new Sequelize(databaseUrl, {
   //   acquire: 30000,
   //   idle: 10000,
   // },
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false,
-      ciphers: "TLS_AES_128_GCM_SHA256",
-    },
-  },
+  // dialectOptions: {
+  //   ssl: {
+  //     require: true,
+  //     rejectUnauthorized: false,
+  //     ciphers: "TLS_AES_128_GCM_SHA256",
+  //   },
+  // },
 });
-
+// db.sync({force: true})
+// console.log("dropped tables")
 db.authenticate()
   .then(() => {
     console.log("Connection has been established successfully.");
