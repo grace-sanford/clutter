@@ -10,7 +10,7 @@ import {
   getRandomName,
 } from "@/modules/hooks/useApi";
 import Modal from "react-modal";
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import Timer from "@/components/Timer";
 
 interface Team {
   id: number;
@@ -169,6 +169,7 @@ const PlayPage = () => {
         <button type="button" onClick={markNameGuessed}>
           Next {">"}
         </button>
+        <Timer numSecs={numSecs}/>
       </Modal>
     </Layout>
   );
