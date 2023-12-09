@@ -1,8 +1,8 @@
 const { Player, Game, Team, Name } = require("./server/db");
 const db = require("./server/db/database").default;
 const Sequelize = require("sequelize");
-const chalk = require('chalk');
-const figlet = require('figlet');
+const chalk = require("chalk");
+const figlet = require("figlet");
 
 // Sample players
 const players = [
@@ -22,11 +22,11 @@ const players = [
 const games = [
   {
     id: 1,
-    uuid: 'ed933d70-d349-45d3-afa4-157c1a226b20'
+    uuid: "ed933d70-d349-45d3-afa4-157c1a226b20",
   },
   {
     id: 2,
-    uuid: 'ed933d70-d349-45d3-afa4-157c1a226b21'
+    uuid: "ed933d70-d349-45d3-afa4-157c1a226b21",
   },
 ];
 
@@ -34,18 +34,18 @@ const teams = [
   {
     id: 1,
     Name: "Team 1",
-    gameId: 1
+    gameId: 1,
   },
   {
     id: 2,
     Name: "Team 2",
-    gameId: 2
+    gameId: 2,
   },
   {
     id: 3,
     Name: "Team 3",
-    gameId: 2
-  }
+    gameId: 2,
+  },
 ];
 
 const names = [
@@ -63,45 +63,39 @@ const names = [
 
 const seed = async () => {
   try {
-    console.log(0.1);
-    console.log('Sequelize Version:', Sequelize.version);
+    console.log("Sequelize Version:", Sequelize.version);
 
     // Test database connection
-    console.log('Testing database connection...');
+    console.log("Testing database connection...");
     await db.authenticate();
-    console.log('Database connection established successfully.');
+    console.log("Database connection established successfully.");
 
     // Synchronize models
-    console.log('Synchronizing database models...');
+    console.log("Synchronizing database models...");
     await db.sync({ force: true });
-    console.log('Database models synchronized successfully.');
-
-    // Output a success message to indicate progress
-    console.log('Seed function is progressing...');
-
-    console.log(1);
+    console.log("Database models synchronized successfully.");
 
     // Seed Games
-    console.log('Seeding Games...');
+    console.log("Seeding Games...");
     await Game.bulkCreate(games);
-    console.log('Games seeded successfully');
+    console.log("Games seeded successfully");
 
     // Seed Teams
-    console.log('Seeding Teams...');
+    console.log("Seeding Teams...");
     await Team.bulkCreate(teams);
-    console.log('Teams seeded successfully');
+    console.log("Teams seeded successfully");
 
     // Seed Players
-    console.log('Seeding Players...');
+    console.log("Seeding Players...");
     await Player.bulkCreate(players);
-    console.log('Players seeded successfully');
+    console.log("Players seeded successfully");
 
     // Seed Names
-    console.log('Seeding Names...');
+    console.log("Seeding Names...");
     await Name.bulkCreate(names);
-    console.log('Names seeded successfully');
+    console.log("Names seeded successfully");
   } catch (err) {
-    console.error('Error during seeding:', err);
+    console.error("Error during seeding:", err);
   }
 };
 
