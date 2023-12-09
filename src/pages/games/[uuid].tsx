@@ -35,7 +35,6 @@ const GamePage = () => {
 
   const router = useRouter();
   const { uuid } = router.query;
-  console.log("process.env.NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL)
 
   const copyToClipboard = async () => {
     try {
@@ -56,7 +55,6 @@ const GamePage = () => {
 
   const handleNumNamesChange = (e: any) => {
     setNumNames(Number(e.target.value));
-    console.log(e.target.value);
   };
 
   const handleNameChange = (index: any, value: any) => {
@@ -74,16 +72,11 @@ const GamePage = () => {
           return;
         }
         const game = await getGame(uuid);
-        console.log("game.response", game.response)
         const gameId = game.response.id;
-        console.log({ gameId });
         if (gameId) {
-          console.log({ names });
           const data = await createNames(gameId, names);
-          console.log({ data });
-          console.log(data.status);
           if (data.status === 201) {
-            setSubmitted(true); // Set the submitted state to true
+            setSubmitted(true);
             closeModal();
           }
         }
@@ -103,8 +96,6 @@ const GamePage = () => {
     setModalIsOpen(false);
     setError(null);
   };
-
-  console.log(numNames);
 
   return (
     <Layout pageTitle={"Clutter | Game Setup"}>
