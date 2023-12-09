@@ -50,7 +50,12 @@ body {
 }
 
 .modal-overlay {
-  background-color: rgba(250, 247, 247, 0.85); /* Adjust the overlay color and transparency */
+  background-color: rgba(
+    250,
+    247,
+    247,
+    0.85
+  ); /* Adjust the overlay color and transparency */
 }
 
 .absolute {
