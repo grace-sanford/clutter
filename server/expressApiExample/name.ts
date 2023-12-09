@@ -20,7 +20,6 @@ let noMoreNamesReturned = false;
 router.get("/random", async (req: Request, res: Response) => {
   try {
     const { gameId } = req.query;
-    console.log("gameId", gameId);
 
     if (!gameId) {
       res
@@ -34,9 +33,8 @@ router.get("/random", async (req: Request, res: Response) => {
       return;
     }
 
-    if (availableNames.size === 0 && typeof gameId === 'number') {
+    if (availableNames.size === 0 && typeof gameId === "number") {
       const names = await Name.findAll({ where: { gameId: gameId } });
-      console.log("names", names);
 
       if (names.length === 0) {
         noMoreNamesReturned = true;
@@ -47,22 +45,20 @@ router.get("/random", async (req: Request, res: Response) => {
       // Reset the flag and add new names
       noMoreNamesReturned = false;
       names.forEach((name) => {
-        const nameValue = name.get("name");// Assuming 'name' is the property you want to add
+        const nameValue = name.get("name"); 
         if (nameValue !== undefined && nameValue !== null) {
           availableNames.add(nameValue);
         } else {
           console.warn("Skipping undefined or null name:", name);
         }
-      });// Assuming 'name' is the property you want to add
+      });
     }
-    console.log({availableNames})
 
     const namesArray = [...availableNames];
     const randomIndex = Math.floor(Math.random() * namesArray.length);
     const randomName = namesArray[randomIndex];
 
     availableNames.delete(randomName);
-    console.log({availableNames})
 
     if (availableNames.size === 0) {
       noMoreNamesReturned = true;
