@@ -27,7 +27,7 @@ const CreatePlayersTeamsForm = () => {
     const selectedValue = e.target.value;
 
     if (selectedValue === "-") {
-      setNumberOfPlayers(0); // or any other default value you prefer
+      setNumberOfPlayers(0);
     } else {
       const parsedValue = parseInt(selectedValue, 10);
 
@@ -38,17 +38,12 @@ const CreatePlayersTeamsForm = () => {
   };
 
   const handlePlayerChange = (newPlayerFields: Array<string>) => {
-    // Join the array into a comma-separated string
     const updatedPlayersString = newPlayerFields.join(", ");
-
-    // Update state
     setPlayerFields(updatedPlayersString);
   };
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Check for errors
-
     if (playerFields.split(",").some((player) => player.trim() === "")) {
       setError(
         new Error("Please enter at least four players before submitting.")
@@ -57,12 +52,13 @@ const CreatePlayersTeamsForm = () => {
     }
     if (!numberOfTeams || parseInt(numberOfTeams, 10) === 0) {
       setError(
-        new Error("Please select the number of teams with which you wish to play.")
+        new Error(
+          "Please select the number of teams with which you wish to play."
+        )
       );
       return;
     }
     router.push(`/games/${getUuid()}`);
-    // Reset error
     setError(null);
 
     try {
@@ -94,7 +90,9 @@ const CreatePlayersTeamsForm = () => {
 
   return (
     <div className="flex flex-col items-center mb-4">
-      <button className="text-white text-bold" onClick={openModal}>Get started</button>
+      <button className="text-white text-bold" onClick={openModal}>
+        Get started
+      </button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

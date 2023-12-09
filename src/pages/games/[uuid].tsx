@@ -129,7 +129,6 @@ const GamePage = () => {
           </div>
           <div className="mt-1 items-center">
             <Modal
-              // appElement={el}
               isOpen={modalIsOpen}
               onRequestClose={closeModal}
               contentLabel="Example Modal"

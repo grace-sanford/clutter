@@ -132,7 +132,6 @@ const About = () => {
             </a>{" "}
             (CC BY 3.0)
           </p>
-          {/* "Play Clutter" button */}
           <Link
             href="/"
             className="bg-green-500 text-white py-3 px-6 rounded-full font-bold text-xl mt-8"

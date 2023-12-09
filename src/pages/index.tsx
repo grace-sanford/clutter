@@ -10,10 +10,9 @@ import { useEffect } from "react";
 import Modal from "react-modal";
 
 export default function Home() {
-
   useEffect(() => {
     // Set the app element to the root element of your application
-    Modal.setAppElement('#your-root-element-id');
+    Modal.setAppElement("#your-root-element-id");
   }, []);
 
   return (
