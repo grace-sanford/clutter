@@ -1,8 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import "../app/globals.css";
-import Link from 'next/link'
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -41,22 +40,6 @@ const Layout = ({ children, pageTitle }: LayoutProps) => {
         <SpeedInsights />
         {children}
       </div>
-      {/* <div
-          //<CreateGame/>
-          className="flex flex-row items-center justify-center gap-2 p-8 lg:p-0 text-sm mb-2 mt-2 text-red-300"
-          style={{ minHeight: "10vh" }}
-        >
-          <span className="lg:whitespace-nowrap">code by</span>
-          <code className="font-mono font-bold whitespace-nowrap lg:ml-2">
-            <a href="https://github.com/grace-sanford" target="_blank">
-              @gracesanford
-            </a>
-          </code>{" "}
-          |
-          <Link className="underline" href="/about">
-            about this project
-          </Link>
-        </div> */}
     </>
   );
 };
