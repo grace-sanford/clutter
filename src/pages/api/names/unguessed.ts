@@ -24,6 +24,7 @@ export default async function handler(
       where: { isGuessed: false, gameId: gameId },
     });
     shuffleArray(unGuessedNames);
+    console.log("unGuessedNames", unGuessedNames)
     res.status(200).json({ unGuessedNames });
   } catch (error) {
     console.error("Error getting random name:", error);

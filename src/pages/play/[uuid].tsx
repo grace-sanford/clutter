@@ -72,11 +72,44 @@ const PlayPage = () => {
     }
   };
 
+  const handleGetNames = async () => {
+    try {
+      if (typeof uuid === "string") {
+        const game = await getGame(uuid);
+        const gameId = game.response.id;
+        setGameId(gameId);
+        if (gameId) {
+          onMountPlayersAndTeams(gameId);
+          const response = await fetch(
+            `/api/names/unguessed?gameId=${gameId}`
+          );
+          if (response.ok) {
+            const data = await response.json();
+            console.log("data", data)
+            setUnguessedNames(data.unGuessedNames);
+            if (data) {
+              setCurrentName(data.unGuessedNames[0]);
+            } else {
+              setCurrentName(null);
+            }
+          } else {
+            console.error(
+              `Failed to fetch unguessed names. Status: ${response.status}`
+            );
+          }
+        }
+      }
+    } catch (err) {
+      console.error("Error fetching unguessed names:", err);
+    }
+  };
+
   const markNameGuessed = async () => {
     try {
       if (currentName && gameId) {
         let nameId = currentName.id;
         const response = await fetch(`/api/names/${nameId}?gameId=${gameId}`);
+        // This is the bug
         unGuessedNames.shift();
         setCurrentName(unGuessedNames[0]);
         incrementScore();
@@ -88,36 +121,6 @@ const PlayPage = () => {
   };
 
   useEffect(() => {
-    const handleGetNames = async () => {
-      try {
-        if (typeof uuid === "string") {
-          const game = await getGame(uuid);
-          const gameId = game.response.id;
-          setGameId(gameId);
-          if (gameId) {
-            onMountPlayersAndTeams(gameId);
-            const response = await fetch(
-              `/api/names/unguessed?gameId=${gameId}`
-            );
-            if (response.ok) {
-              const data = await response.json();
-              setUnguessedNames(data.unGuessedNames);
-              if (data) {
-                setCurrentName(data.unGuessedNames[0]);
-              } else {
-                setCurrentName(null);
-              }
-            } else {
-              console.error(
-                `Failed to fetch unguessed names. Status: ${response.status}`
-              );
-            }
-          }
-        }
-      } catch (err) {
-        console.error("Error fetching unguessed names:", err);
-      }
-    };
     handleGetNames();
   }, [uuid]);
 
@@ -126,6 +129,7 @@ const PlayPage = () => {
   };
 
   const openModal = () => {
+    handleGetNames();
     setIsModalOpen(true);
 
     // Set isModalOpen to false after a certain number of seconds
@@ -133,6 +137,7 @@ const PlayPage = () => {
       setIsModalOpen(false);
     }, numSecs * 1000);
   };
+  console.log("unGuessedNames", unGuessedNames);
 
   return (
     <Layout pageTitle={"Clutter | Play"}>
